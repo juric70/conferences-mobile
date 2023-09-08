@@ -24,6 +24,6 @@ class Category {
     );
   }
   static Color hexToColor(String code) {
-    return Color(int.parse(code.substring(1, 7), radix: 16) + 0xff000000);
+    return Color(int.parse(code.substring(0, 6), radix: 16) + 0xff000000);
   }
 }

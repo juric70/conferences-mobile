@@ -1,4 +1,5 @@
 import 'package:conferences_mobile/model/auth.dart';
+import 'package:conferences_mobile/pages/conferences/conferences_create.dart';
 import 'package:conferences_mobile/pages/index_city.dart';
 import 'package:conferences_mobile/pages/authentification/login.dart';
 import 'package:conferences_mobile/pages/authentification/logout.dart';
@@ -29,6 +30,7 @@ class MyWidget extends StatelessWidget {
       routes: {
         '/': (context) => const HomePage(),
         '/conferences': (context) => const ConferencesAllScreen(),
+        '/conferencesCreate': (context) => const ConferencesCreateScreen(),
         '/indexCity': (context) => const IndexCity(),
         '/register': (context) => const RegistrationScreen(),
         '/login': (context) => const LoginScreen(),

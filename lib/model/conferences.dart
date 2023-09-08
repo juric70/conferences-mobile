@@ -23,9 +23,7 @@ class Conference {
       this.conferences_day});
 
   static Color hexToColor(String code) {
-    print(code);
     Color col = Color(int.parse(code.substring(0, 6), radix: 16) + 0xff000000);
-    print(col);
     return col;
   }
 

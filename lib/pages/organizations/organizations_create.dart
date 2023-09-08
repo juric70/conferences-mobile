@@ -138,7 +138,7 @@ class _OrganizationCreateScreenState extends State<OrganizationCreateScreen> {
           },
           showBackIcon: true,
         ),
-        body: Stack(
+        body: const Stack(
           children: [
             BackgroundScrollView(),
             Center(
@@ -168,7 +168,7 @@ class _OrganizationCreateScreenState extends State<OrganizationCreateScreen> {
             showBackIcon: false,
           ),
           body: Stack(children: [
-            BackgroundScrollView(),
+            const BackgroundScrollView(),
             SingleChildScrollView(
               child: Center(
                 child: Column(
@@ -177,7 +177,7 @@ class _OrganizationCreateScreenState extends State<OrganizationCreateScreen> {
                       padding: const EdgeInsets.all(15.0),
                       child: Text(
                         'Create your organization!'.toUpperCase(),
-                        style: TextStyle(
+                        style: const TextStyle(
                           color: Colors.white,
                           fontSize: 20.0,
                           fontWeight: FontWeight.w600,

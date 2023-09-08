@@ -151,9 +151,9 @@ class _SubscriptionCreateScreenState extends State<SubscriptionCreateScreen> {
             showBackIcon: false,
           ),
           body: Stack(children: [
-            BackgroundScrollView(),
+            const BackgroundScrollView(),
             isLoading
-                ? Center(
+                ? const Center(
                     child: CircularProgressIndicator(),
                   )
                 : SingleChildScrollView(

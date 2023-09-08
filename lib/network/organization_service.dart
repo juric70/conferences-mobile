@@ -54,4 +54,21 @@ class OrganizationService {
       throw Future.error(e);
     }
   }
+
+  static Future<List<Organization>> getOrganizations() async {
+    try {
+      final response =
+          await http.get(Uri.parse('${ApiConstances.baseUrl}organizations'));
+      if (response.statusCode == 200) {
+        final List<dynamic> data = jsonDecode(response.body);
+        final List<Organization> organization =
+            data.map((json) => Organization.fromJson(json)).toList();
+        return organization;
+      } else {
+        return List.empty();
+      }
+    } catch (e) {
+      throw Future.error(e);
+    }
+  }
 }

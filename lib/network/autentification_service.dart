@@ -86,12 +86,48 @@ class AuthentificationService extends AuthModel {
 
       for (var roleData in rolesData) {
         if (roleData['name'] == 'user') {
-          return roleData['id'];
+          return int.parse(roleData['id']);
         }
       }
       throw Exception('User not found');
     } else {
       throw Exception('Failed to fetch roles');
+    }
+  }
+
+  static Future<int> getUserByEmail(String email) async {
+    try {
+      final response =
+          await http.get(Uri.parse('${ApiConstances.baseUrl}users/$email'));
+
+      if (response.statusCode == 200) {
+        final Map<String, dynamic> data = jsonDecode(response.body);
+        final UserModel user = UserModel.fromJson(data);
+        return user.id;
+        // return int.parse(user['id']);
+      } else {
+        return -1;
+      }
+    } catch (e) {
+      return Future.error(e);
+    }
+  }
+
+  static Future<List<UserModel>> getUsers() async {
+    try {
+      final response =
+          await http.get(Uri.parse('${ApiConstances.baseUrl}users'));
+      if (response.statusCode == 200) {
+        final List<dynamic> jsonList = jsonDecode(response.body);
+        final List<UserModel> users =
+            jsonList.map((json) => UserModel.fromJson(json)).toList();
+
+        return users;
+      } else {
+        return List.empty();
+      }
+    } catch (e) {
+      return Future.error(e);
     }
   }
 }

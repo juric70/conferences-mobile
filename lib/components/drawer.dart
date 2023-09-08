@@ -65,7 +65,7 @@ class _MyDrawerState extends State<MyDrawer> {
             ),
             ListTile(
               title: const Text(
-                'Conferences',
+                'Conferences create',
                 style: TextStyle(color: Colors.white),
               ),
               onTap: () {
@@ -73,7 +73,7 @@ class _MyDrawerState extends State<MyDrawer> {
                 Navigator.pop(context);
 
                 // Navigate to the '/conferences' page
-                Navigator.pushNamed(context, '/conferences');
+                Navigator.pushNamed(context, '/conferencesCreate');
               },
             ),
             const Divider(
@@ -88,6 +88,20 @@ class _MyDrawerState extends State<MyDrawer> {
               ),
               onTap: () {
                 Navigator.of(context).pushNamed('/organizationsOffers');
+              },
+            ),
+            const Divider(
+              color: Color(0xFF4924b6),
+              height: 2,
+              thickness: 3,
+            ),
+            ListTile(
+              title: const Text(
+                'Create day',
+                style: TextStyle(color: Colors.white),
+              ),
+              onTap: () {
+                Navigator.of(context).pushNamed('/conferenceDayCreate');
               },
             ),
             const Divider(

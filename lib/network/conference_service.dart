@@ -39,6 +39,21 @@ class ConferenceServise {
     }
   }
 
+  static Future<int> getIdOfCreatorOfConference(int conferenceId) async {
+    try {
+      final response = await http.get(Uri.parse(
+          '${ApiConstances.baseUrl}conferences/$conferenceId/creator'));
+      if (response.statusCode == 200) {
+        final data = jsonDecode(response.body);
+        return data;
+      } else {
+        return -1;
+      }
+    } catch (e) {
+      throw Future.error(e);
+    }
+  }
+
   static Future<String> buyTicket(String data) async {
     final Map<String, dynamic> pack = jsonDecode(data);
 
@@ -90,25 +105,67 @@ class ConferenceServise {
   }
 
   static Future<String> createConference(String data) async {
+    final response = await http.post(
+      Uri.parse('${ApiConstances.baseUrl}conferences'),
+      body: data,
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+        'Cookie': 'laravel_session=cookie_user',
+      },
+    );
     try {
-      final response = await http.post(
-        Uri.parse('${ApiConstances.baseUrl}conferences'),
-        body: data,
-        headers: <String, String>{
-          'Content-Type': 'application/json; charset=UTF-8',
-          'Cookie': 'laravel_session=cookie_user',
-        },
-      );
-
       if (response.statusCode == 200) {
-        return '200';
+        return response.body;
+      } else if (response.statusCode == 400) {
+        return '-1';
       } else {
-        return '';
+        return response.body;
       }
     } catch (e) {
       throw Future.error(e);
     }
   }
+
+  static Future<String> createPartners(int id, String data) async {
+    final response = await http.post(
+      Uri.parse('${ApiConstances.baseUrl}conferences/$id/partners'),
+      body: data,
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+        'Cookie': 'laravel_session=cookie_user',
+      },
+    );
+    try {
+      if (response.statusCode == 200) {
+        return '200';
+      } else {
+        return '400';
+      }
+    } catch (e) {
+      throw Future.error(e);
+    }
+  }
+
+  static Future<String> createUsersOffers(String data) async {
+    final response = await http.post(
+      Uri.parse('${ApiConstances.baseUrl}usersOffers'),
+      body: data,
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+        'Cookie': 'laravel_session=cookie_user',
+      },
+    );
+    try {
+      if (response.statusCode == 201) {
+        return '200';
+      } else {
+        return response.body;
+      }
+    } catch (e) {
+      throw Future.error(e);
+    }
+  }
+
   // static Future<int> reserveTicket(String data) async {
   //   final response = await http.post(
   //     Uri.parse('${ApiConstances.baseUrl}tickets'),
