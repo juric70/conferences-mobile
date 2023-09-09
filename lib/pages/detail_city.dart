@@ -6,10 +6,10 @@ import 'package:flutter/material.dart';
 
 class DetailCity extends StatefulWidget {
   final City city;
-  DetailCity({required this.city, super.key});
+  const DetailCity({required this.city, super.key});
 
   @override
-  State<DetailCity> createState() => _DetailCityState(this.city);
+  State<DetailCity> createState() => _DetailCityState(city);
 }
 
 class _DetailCityState extends State<DetailCity> {
@@ -44,7 +44,7 @@ class _DetailCityState extends State<DetailCity> {
       ),
       body: Stack(
         children: [
-          BackgroundScrollView(),
+          const BackgroundScrollView(),
           SingleChildScrollView(
             child: Card(
               elevation: 4,
@@ -53,7 +53,7 @@ class _DetailCityState extends State<DetailCity> {
                 borderRadius: BorderRadius.circular(14),
               ),
               child: Padding(
-                padding: EdgeInsets.all(24),
+                padding: const EdgeInsets.all(24),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [

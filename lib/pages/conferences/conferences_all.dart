@@ -104,10 +104,10 @@ class _ConferencesAllScreenState extends State<ConferencesAllScreen> {
                               height: 40.0,
                               decoration: BoxDecoration(
                                 border: Border.all(
-                                  color: Color(0xff4a23b2),
+                                  color: const Color(0xff4a23b2),
                                 ),
                                 borderRadius: BorderRadius.circular(5.0),
-                                color: Color(0xff1a1a1a),
+                                color: const Color(0xff1a1a1a),
                               ),
                               child: TextField(
                                 onChanged: (value) {
@@ -125,7 +125,8 @@ class _ConferencesAllScreenState extends State<ConferencesAllScreen> {
                                     color: Color(0xff4a23b2),
                                   ),
                                 ),
-                                style: TextStyle(color: Color(0xffbe2b61)),
+                                style:
+                                    const TextStyle(color: Color(0xffbe2b61)),
                               ),
                             ),
                           ),
@@ -143,10 +144,10 @@ class _ConferencesAllScreenState extends State<ConferencesAllScreen> {
                           borderRadius: BorderRadius.circular(20.0),
                           border: Border.all(
                             color: randomNumber == 1
-                                ? Color(0xffc32d63)
+                                ? const Color(0xffc32d63)
                                 : randomNumber == 2
-                                    ? Color(0xffeadc48)
-                                    : Color(0xff4924b6),
+                                    ? const Color(0xffeadc48)
+                                    : const Color(0xff4924b6),
                           ),
                         ),
                         child: Row(
@@ -193,13 +194,13 @@ class _ConferencesAllScreenState extends State<ConferencesAllScreen> {
                             ),
 
                             //SASTRANE OD KARTICE :)
-                            Container(
+                            SizedBox(
                               height: 220.0,
                               child: Column(
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
                                 children: [
-                                  Container(
+                                  SizedBox(
                                     height: 32.0,
                                     child: Padding(
                                       padding: const EdgeInsets.only(top: 10.0),
@@ -229,7 +230,7 @@ class _ConferencesAllScreenState extends State<ConferencesAllScreen> {
                                       overflow: TextOverflow.ellipsis,
                                     ),
                                   ),
-                                  Container(
+                                  SizedBox(
                                     height: 45.0,
                                     width: cardWidth - 17,
                                     child: Row(
@@ -239,8 +240,8 @@ class _ConferencesAllScreenState extends State<ConferencesAllScreen> {
                                           for (Category category
                                               in conferences.categories ?? [])
                                             Container(
-                                              margin:
-                                                  EdgeInsets.only(left: 10.0),
+                                              margin: const EdgeInsets.only(
+                                                  left: 10.0),
                                               decoration: BoxDecoration(
                                                 border: Border.all(
                                                   color: category.color!,
@@ -265,7 +266,7 @@ class _ConferencesAllScreenState extends State<ConferencesAllScreen> {
                                             ),
                                         ]),
                                   ),
-                                  Container(
+                                  SizedBox(
                                     height: 45.0,
                                     width: cardWidth - 17,
                                     child: Padding(
@@ -287,10 +288,13 @@ class _ConferencesAllScreenState extends State<ConferencesAllScreen> {
                                                   textAlign: TextAlign.left,
                                                   style: TextStyle(
                                                     color: randomNumber == 1
-                                                        ? Color(0xffc32d63)
+                                                        ? const Color(
+                                                            0xffc32d63)
                                                         : randomNumber == 2
-                                                            ? Color(0xffeadc48)
-                                                            : Color(0xff997fe6),
+                                                            ? const Color(
+                                                                0xffeadc48)
+                                                            : const Color(
+                                                                0xff997fe6),
                                                   ),
                                                 ),
                                                 Text(
@@ -298,10 +302,13 @@ class _ConferencesAllScreenState extends State<ConferencesAllScreen> {
                                                   textAlign: TextAlign.left,
                                                   style: TextStyle(
                                                     color: randomNumber == 1
-                                                        ? Color(0xffc32d63)
+                                                        ? const Color(
+                                                            0xffc32d63)
                                                         : randomNumber == 2
-                                                            ? Color(0xffeadc48)
-                                                            : Color(0xff997fe6),
+                                                            ? const Color(
+                                                                0xffeadc48)
+                                                            : const Color(
+                                                                0xff997fe6),
                                                   ),
                                                 ),
                                               ],
@@ -323,18 +330,22 @@ class _ConferencesAllScreenState extends State<ConferencesAllScreen> {
                                               },
                                               style: ElevatedButton.styleFrom(
                                                 foregroundColor: Colors.black,
-                                                backgroundColor:
-                                                    randomNumber == 1
-                                                        ? Color(0xffc32d63)
-                                                        : randomNumber == 2
-                                                            ? Color(0xffeadc48)
-                                                            : Color(0xff4924b6),
+                                                backgroundColor: randomNumber ==
+                                                        1
+                                                    ? const Color(0xffc32d63)
+                                                    : randomNumber == 2
+                                                        ? const Color(
+                                                            0xffeadc48)
+                                                        : const Color(
+                                                            0xff4924b6),
                                                 side: BorderSide(
                                                   color: randomNumber == 1
-                                                      ? Color(0xff91224a)
+                                                      ? const Color(0xff91224a)
                                                       : randomNumber == 2
-                                                          ? Color(0xffeada4b)
-                                                          : Color(0xff331980),
+                                                          ? const Color(
+                                                              0xffeada4b)
+                                                          : const Color(
+                                                              0xff331980),
                                                 ),
                                                 shape: RoundedRectangleBorder(
                                                   borderRadius:
@@ -346,9 +357,10 @@ class _ConferencesAllScreenState extends State<ConferencesAllScreen> {
                                                 'See more!',
                                                 style: TextStyle(
                                                   color: randomNumber == 1
-                                                      ? Color(0xff2a2a2a)
+                                                      ? const Color(0xff2a2a2a)
                                                       : randomNumber == 2
-                                                          ? Color(0xff2a2a2a)
+                                                          ? const Color(
+                                                              0xff2a2a2a)
                                                           : Colors.white,
                                                 ),
                                               ),
@@ -375,6 +387,5 @@ class _ConferencesAllScreenState extends State<ConferencesAllScreen> {
 
 @override
 Widget build(BuildContext context) {
-  // TODO: implement build
   throw UnimplementedError();
 }

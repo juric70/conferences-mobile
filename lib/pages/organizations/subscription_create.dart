@@ -162,14 +162,12 @@ class _SubscriptionCreateScreenState extends State<SubscriptionCreateScreen> {
                         Padding(
                           padding: const EdgeInsets.all(15.0),
                           child: Center(
-                            child: Container(
-                              child: Text(
-                                _organizationsOffer.kind,
-                                style: const TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 20.0,
-                                  fontWeight: FontWeight.w600,
-                                ),
+                            child: Text(
+                              _organizationsOffer.kind,
+                              style: const TextStyle(
+                                color: Colors.white,
+                                fontSize: 20.0,
+                                fontWeight: FontWeight.w600,
                               ),
                             ),
                           ),
@@ -179,7 +177,7 @@ class _SubscriptionCreateScreenState extends State<SubscriptionCreateScreen> {
                             padding: const EdgeInsets.all(8.0),
                             child: Text(
                               _organizationsOffer.description,
-                              style: TextStyle(color: Colors.white),
+                              style: const TextStyle(color: Colors.white),
                             ),
                           ),
                         ),
@@ -188,7 +186,7 @@ class _SubscriptionCreateScreenState extends State<SubscriptionCreateScreen> {
                             padding: const EdgeInsets.all(8.0),
                             child: Text(
                               'Nuber of conference to publish: ${_organizationsOffer.publishable_conferences} for ${_organizationsOffer.price}€',
-                              style: TextStyle(
+                              style: const TextStyle(
                                 color: Colors.white,
                                 fontSize: 17.0,
                               ),
@@ -252,7 +250,7 @@ class _SubscriptionCreateScreenState extends State<SubscriptionCreateScreen> {
                             width: MediaQuery.of(context).size.width * 0.85,
                             child: ElevatedButton(
                               style: ElevatedButton.styleFrom(
-                                primary: const Color(0xffbe2b61),
+                                backgroundColor: const Color(0xffbe2b61),
                                 padding:
                                     const EdgeInsets.symmetric(vertical: 16.0),
                                 shape: RoundedRectangleBorder(

@@ -64,7 +64,6 @@ class _LoginScreenState extends State<LoginScreen> {
   Future<void> _checkLoggedInStatus() async {
     await Future.delayed(Duration.zero);
     UserModel? user = await AuthModel().LoggedInUser();
-    print(user);
     setState(() {
       if (user == null) {
         isLoggedIn = false;
@@ -120,11 +119,10 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                   ),
                 ),
-                Container(
-                    child: Text(
+                Text(
                   message1 ?? '',
-                  style: TextStyle(color: Colors.red),
-                )),
+                  style: const TextStyle(color: Colors.red),
+                ),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: FractionallySizedBox(
@@ -217,7 +215,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     width: MediaQuery.of(context).size.width * 0.85,
                     child: ElevatedButton(
                       style: ElevatedButton.styleFrom(
-                        primary: const Color(0xffbe2b61),
+                        backgroundColor: const Color(0xffbe2b61),
                         padding: const EdgeInsets.symmetric(vertical: 16.0),
                         shape: RoundedRectangleBorder(
                           side: const BorderSide(
@@ -245,20 +243,17 @@ class _LoginScreenState extends State<LoginScreen> {
       return Scaffold(
         appBar: CustomAppBar(
           onDrawerIconPressed: () {
-            Navigator.of(context).push(
-              MaterialPageRoute(
-                builder: (context) => MyDrawer(
-                  onDrawerIconPressed: () {
-                    Scaffold.of(context).openDrawer();
-                  },
-                ),
-              ),
-            );
+            Scaffold.of(context).openDrawer();
           },
           onBackIconPressed: () {
             Navigator.of(context).maybePop();
           },
           showBackIcon: true,
+        ),
+        drawer: MyDrawer(
+          onDrawerIconPressed: () {
+            Scaffold.of(context).openDrawer();
+          },
         ),
         body: const Stack(
           children: [

@@ -36,24 +36,25 @@ class _MyDrawerState extends State<MyDrawer> {
   @override
   Widget build(BuildContext context) {
     return Drawer(
-        backgroundColor: const Color(0xFF2A2A2A),
+        backgroundColor: Color(0xff2a2a2a).withOpacity(0.98),
         shadowColor: const Color(0xFF4924b6),
-        width: 150.0,
         child: ListView(
           children: [
             InkWell(
               onTap: () {
                 Navigator.pop(context);
-                Navigator.pushNamed(context, '/');
               },
               child: const SizedBox(
                 height: 60.0,
                 child: DrawerHeader(
                   decoration: BoxDecoration(color: Color(0xFF1A1A1A)),
                   margin: EdgeInsets.zero,
-                  child: Text(
-                    'CONFERENCES',
-                    style: TextStyle(color: Colors.white),
+                  child: Align(
+                    alignment: Alignment.centerLeft,
+                    child: Icon(
+                      Icons.arrow_back,
+                      color: Colors.white,
+                    ),
                   ),
                 ),
               ),
@@ -65,15 +66,25 @@ class _MyDrawerState extends State<MyDrawer> {
             ),
             ListTile(
               title: const Text(
-                'Conferences create',
+                'Home',
                 style: TextStyle(color: Colors.white),
               ),
               onTap: () {
-                // Close the drawer
-                Navigator.pop(context);
-
-                // Navigate to the '/conferences' page
-                Navigator.pushNamed(context, '/conferencesCreate');
+                Navigator.of(context).pushNamed('/');
+              },
+            ),
+            const Divider(
+              color: Color(0xFF4924b6),
+              height: 2,
+              thickness: 3,
+            ),
+            ListTile(
+              title: const Text(
+                'Events',
+                style: TextStyle(color: Colors.white),
+              ),
+              onTap: () {
+                Navigator.of(context).pushNamed('/conferences');
               },
             ),
             const Divider(
@@ -95,34 +106,39 @@ class _MyDrawerState extends State<MyDrawer> {
               height: 2,
               thickness: 3,
             ),
-            ListTile(
-              title: const Text(
-                'Create day',
-                style: TextStyle(color: Colors.white),
+            if (isLoggedIn == true)
+              Column(
+                children: [
+                  ListTile(
+                    title: const Text(
+                      'My tickets',
+                      style: TextStyle(color: Colors.white),
+                    ),
+                    onTap: () {
+                      Navigator.of(context).pushNamed('/bookedTickets');
+                    },
+                  ),
+                  const Divider(
+                    color: Color(0xFF4924b6),
+                    height: 2,
+                    thickness: 3,
+                  ),
+                  ListTile(
+                    title: const Text(
+                      'My organizations',
+                      style: TextStyle(color: Colors.white),
+                    ),
+                    onTap: () {
+                      Navigator.of(context).pushNamed('/myorganizations');
+                    },
+                  ),
+                  const Divider(
+                    color: Color(0xFF4924b6),
+                    height: 2,
+                    thickness: 3,
+                  ),
+                ],
               ),
-              onTap: () {
-                Navigator.of(context).pushNamed('/conferenceDayCreate');
-              },
-            ),
-            const Divider(
-              color: Color(0xFF4924b6),
-              height: 2,
-              thickness: 3,
-            ),
-            ListTile(
-              title: const Text(
-                'Create organization',
-                style: TextStyle(color: Colors.white),
-              ),
-              onTap: () {
-                Navigator.of(context).pushNamed('/organizationsCreate');
-              },
-            ),
-            const Divider(
-              color: Color(0xFF4924b6),
-              height: 2,
-              thickness: 3,
-            ),
             if (isLoggedIn == true)
               ListTile(
                 title: const Text(
@@ -147,16 +163,6 @@ class _MyDrawerState extends State<MyDrawer> {
               color: Color(0xFF4924b6),
               height: 2,
               thickness: 3,
-            ),
-            ListTile(
-              title: const Text(
-                'Conferences',
-                style: TextStyle(color: Colors.white),
-              ),
-              onTap: () {
-                Navigator.pop(context);
-                widget.onDrawerIconPressed();
-              },
             ),
           ],
         ));

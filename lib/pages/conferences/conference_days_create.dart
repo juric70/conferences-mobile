@@ -12,7 +12,7 @@ import 'package:flutter/material.dart';
 
 class ConferencesDayCreateScreen extends StatefulWidget {
   final int conferenceId;
-  const ConferencesDayCreateScreen({required this.conferenceId});
+  const ConferencesDayCreateScreen({super.key, required this.conferenceId});
 
   @override
   State<ConferencesDayCreateScreen> createState() =>
@@ -173,9 +173,9 @@ class _ConferencesDayCreateScreenState
             showBackIcon: false,
           ),
           body: Stack(children: [
-            BackgroundScrollView(),
+            const BackgroundScrollView(),
             isLoading
-                ? Center(
+                ? const Center(
                     child: CircularProgressIndicator(),
                   )
                 : SingleChildScrollView(

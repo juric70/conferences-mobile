@@ -29,6 +29,7 @@ class _BookTicketScreenState extends State<BookTicketScreen> {
   bool isLoggedIn = false;
   List<ConferenceDay> conferenceDay = [];
   List<int> selectedIds = [];
+  String? conferenceDayError;
   @override
   void initState() {
     super.initState();
@@ -98,7 +99,6 @@ class _BookTicketScreenState extends State<BookTicketScreen> {
           ),
         );
       } else {
-        // ignore: use_build_context_synchronously
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             content: Text(result),

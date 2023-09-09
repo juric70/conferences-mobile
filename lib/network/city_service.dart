@@ -30,7 +30,6 @@ class CityService {
         final City city = City.fromJson(data);
         return city;
       } else {
-        print(response.statusCode);
         return City();
       }
     } catch (e) {

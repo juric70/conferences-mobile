@@ -15,7 +15,7 @@ class TimetableCreateScreen extends StatefulWidget {
   final int conferenceId;
 
   const TimetableCreateScreen(
-      {required this.conferenceDayId, required this.conferenceId});
+      {super.key, required this.conferenceDayId, required this.conferenceId});
 
   @override
   State<TimetableCreateScreen> createState() => _TimetableCreateScreenState();
@@ -25,14 +25,14 @@ class _TimetableCreateScreenState extends State<TimetableCreateScreen> {
   bool isCreatorOfConference = false;
   UserModel? user;
   bool isLoading = false;
-  TextEditingController _starttimeController = TextEditingController();
-  TextEditingController _endtimeController = TextEditingController();
-  TextEditingController _titleController = TextEditingController();
-  TextEditingController _addressController = TextEditingController();
-  TextEditingController _conferenceRoomController = TextEditingController();
-  TextEditingController _descriptionController = TextEditingController();
-  TextEditingController _availableSeatsController = TextEditingController();
-  TextEditingController _tutorController = TextEditingController();
+  final TextEditingController _starttimeController = TextEditingController();
+  final TextEditingController _endtimeController = TextEditingController();
+  final TextEditingController _titleController = TextEditingController();
+  final TextEditingController _addressController = TextEditingController();
+  final TextEditingController _conferenceRoomController = TextEditingController();
+  final TextEditingController _descriptionController = TextEditingController();
+  final TextEditingController _availableSeatsController = TextEditingController();
+  final TextEditingController _tutorController = TextEditingController();
   String? _startingTimeError,
       _endingTimeError,
       _titleEerror,
@@ -182,7 +182,7 @@ class _TimetableCreateScreenState extends State<TimetableCreateScreen> {
           ),
           body: Stack(
             children: [
-              BackgroundScrollView(),
+              const BackgroundScrollView(),
               SingleChildScrollView(
                 child: Center(
                   child: Column(

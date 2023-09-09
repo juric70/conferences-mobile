@@ -12,7 +12,7 @@ class UsersOffersCreateScreen extends StatefulWidget {
   final int conferenceId;
   final int conferenceDayId;
   const UsersOffersCreateScreen(
-      {required this.conferenceId, required this.conferenceDayId});
+      {super.key, required this.conferenceId, required this.conferenceDayId});
 
   @override
   State<UsersOffersCreateScreen> createState() =>
@@ -22,11 +22,11 @@ class UsersOffersCreateScreen extends StatefulWidget {
 class _UsersOffersCreateScreenState extends State<UsersOffersCreateScreen> {
   bool isCreatorOfConference = false;
   UserModel? user;
-  TextEditingController _kindController = TextEditingController();
-  TextEditingController _codeController = TextEditingController();
-  TextEditingController _priceController = TextEditingController();
-  TextEditingController _descriptionController = TextEditingController();
-  TextEditingController _numberOfDaysController = TextEditingController();
+  final TextEditingController _kindController = TextEditingController();
+  final TextEditingController _codeController = TextEditingController();
+  final TextEditingController _priceController = TextEditingController();
+  final TextEditingController _descriptionController = TextEditingController();
+  final TextEditingController _numberOfDaysController = TextEditingController();
   String? _kindError,
       _codeError,
       _priceError,
@@ -154,7 +154,7 @@ class _UsersOffersCreateScreenState extends State<UsersOffersCreateScreen> {
             showBackIcon: false,
           ),
           body: Stack(children: [
-            BackgroundScrollView(),
+            const BackgroundScrollView(),
             SingleChildScrollView(
               child: Center(
                 child: Column(

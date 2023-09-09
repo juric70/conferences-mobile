@@ -21,15 +21,13 @@ class AuthentificationService extends AuthModel {
       if (response.statusCode == 200) {
         final prefs = await SharedPreferences.getInstance();
         await prefs.setString('cookie', response.headers['set-cookie']!);
-        print('success');
         return ('');
       } else if (response.statusCode == 422) {
-        return ((response.body));
+        return response.body;
       } else {
         return ('');
       }
     } catch (e) {
-      print(e);
       return (jsonEncode(response.body));
     }
   }

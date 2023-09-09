@@ -25,7 +25,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
   TextEditingController telephoneNumber = TextEditingController();
   TextEditingController roleIdController = TextEditingController();
   TextEditingController cityIdController = TextEditingController();
-  TextEditingController AddressController = TextEditingController();
+  TextEditingController addressController = TextEditingController();
   List<City> _city = [];
   int? selectedCity;
   bool isLoggedIn = false;
@@ -41,14 +41,14 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
       String name = nameContoller.text;
       String email = emailController.text;
       String password = passwordController.text;
-      String password_confirmation = passwordConfirmationController.text;
+      String passwordConfirmation = passwordConfirmationController.text;
       String telNumb = telephoneNumber.text;
-      String address = AddressController.text;
+      String address = addressController.text;
       final response = {
         'name': name,
         'email': email,
         'password': password,
-        'password_confirmation': password_confirmation,
+        'password_confirmation': passwordConfirmation,
         'telephone_number': telNumb,
         'address': address,
         'city_id': selectedCity,
@@ -86,7 +86,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
         Navigator.of(context).pushNamed('/');
       }
     } catch (e) {
-      print(e);
+      throw Future.error(e);
     }
   }
 
@@ -100,7 +100,6 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
   Future<void> _checkLoggedInStatus() async {
     await Future.delayed(Duration.zero);
     UserModel? user = await AuthModel().LoggedInUser();
-    print(user);
     setState(() {
       if (user == null) {
         isLoggedIn = false;
@@ -341,7 +340,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                         child: FractionallySizedBox(
                           widthFactor: 0.9,
                           child: TextFormField(
-                            controller: AddressController,
+                            controller: addressController,
                             decoration: InputDecoration(
                               labelText: 'Address',
                               errorText: _addressError,
@@ -441,7 +440,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                           ),
                         ),
                       ),
-                      Container(
+                      SizedBox(
                         width: MediaQuery.of(context).size.width * 0.8,
                         child: Align(
                           alignment: Alignment.topLeft,
@@ -481,7 +480,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                           width: MediaQuery.of(context).size.width * 0.85,
                           child: ElevatedButton(
                             style: ElevatedButton.styleFrom(
-                              primary: const Color(0xffbe2b61),
+                              backgroundColor: const Color(0xffbe2b61),
                               padding:
                                   const EdgeInsets.symmetric(vertical: 16.0),
                               shape: RoundedRectangleBorder(

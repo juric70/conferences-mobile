@@ -38,6 +38,26 @@ class OrganizationService {
     }
   }
 
+  static Future<String> editOrganization(String data, int id) async {
+    final response = await http.put(
+      Uri.parse('${ApiConstances.baseUrl}organizations/$id'),
+      body: data,
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+        'Cookie': 'laravel_session=cookie_user',
+      },
+    );
+    try {
+      if (response.statusCode == 200) {
+        return '200';
+      } else {
+        return response.body;
+      }
+    } catch (e) {
+      throw Exception(e);
+    }
+  }
+
   static Future<List<Organization>> getOrganizationsByUser(int id) async {
     try {
       final response = await http
@@ -66,6 +86,39 @@ class OrganizationService {
         return organization;
       } else {
         return List.empty();
+      }
+    } catch (e) {
+      throw Future.error(e);
+    }
+  }
+
+  static Future<int> getIdOfCreatorOfOrganization(int organizationId) async {
+    try {
+      final response = await http.get(
+          Uri.parse('${ApiConstances.baseUrl}organizations/$organizationId'));
+      if (response.statusCode == 200) {
+        final Map<String, dynamic> data = jsonDecode(response.body);
+        final Organization organization = Organization.fromJson(data);
+        return organization.creatorId;
+      } else {
+        return -1;
+      }
+    } catch (e) {
+      throw Future.error(e);
+    }
+  }
+
+  static Future<Organization> getOfOrganizationDetails(
+      int organizationId) async {
+    try {
+      final response = await http.get(
+          Uri.parse('${ApiConstances.baseUrl}organizations/$organizationId'));
+      if (response.statusCode == 200) {
+        final Map<String, dynamic> data = jsonDecode(response.body);
+        final Organization organization = Organization.fromJson(data);
+        return organization;
+      } else {
+        return Organization();
       }
     } catch (e) {
       throw Future.error(e);

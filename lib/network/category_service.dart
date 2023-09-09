@@ -10,7 +10,6 @@ class CategoryService {
       final response =
           await http.get(Uri.parse('${ApiConstances.baseUrl}categories'));
       if (response.statusCode == 200) {
-        print(response.body);
         final List<dynamic> jsonList = jsonDecode(response.body);
         final List<Category> categoryList =
             jsonList.map((json) => Category.fromJson(json)).toList();

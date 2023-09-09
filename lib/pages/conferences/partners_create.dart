@@ -19,7 +19,7 @@ class PartnersAddScreen extends StatefulWidget {
   final int conferenceId;
   final int conferenceDayId;
   const PartnersAddScreen(
-      {required this.conferenceId, required this.conferenceDayId});
+      {super.key, required this.conferenceId, required this.conferenceDayId});
   @override
   State<PartnersAddScreen> createState() => _PartnersAddScreenState();
 }
@@ -118,7 +118,7 @@ class _PartnersAddScreenState extends State<PartnersAddScreen> {
   Widget build(BuildContext context) {
     List<MultiSelectItem<Organization>> multiSelect = _organizations
         .map((organization) =>
-            MultiSelectItem<Organization>(organization, '${organization.name}'))
+            MultiSelectItem<Organization>(organization, organization.name))
         .toList();
     if (isCreatorOfConference == false) {
       return Scaffold(
@@ -170,7 +170,7 @@ class _PartnersAddScreenState extends State<PartnersAddScreen> {
           ),
           body: Stack(
             children: [
-              BackgroundScrollView(),
+              const BackgroundScrollView(),
               SingleChildScrollView(
                 child: Center(
                   child: Column(

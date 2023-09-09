@@ -43,7 +43,7 @@ class _ConferencesCreateScreenState extends State<ConferencesCreateScreen> {
   }
 
   bool _isNumeric(String str) {
-    if (str == null) {
+    if (str.isNotEmpty) {
       return false;
     }
     return double.tryParse(str) != null;
@@ -201,9 +201,9 @@ class _ConferencesCreateScreenState extends State<ConferencesCreateScreen> {
             showBackIcon: false,
           ),
           body: Stack(children: [
-            BackgroundScrollView(),
+            const BackgroundScrollView(),
             isLoading
-                ? Center(
+                ? const Center(
                     child: CircularProgressIndicator(),
                   )
                 : SingleChildScrollView(
@@ -399,7 +399,7 @@ class _ConferencesCreateScreenState extends State<ConferencesCreateScreen> {
 
                         Padding(
                           padding: const EdgeInsets.all(15.0),
-                          child: Container(
+                          child: SizedBox(
                             height: 50.0,
                             width: MediaQuery.of(context).size.width * 0.85,
                             child: TextFormField(
@@ -450,7 +450,7 @@ class _ConferencesCreateScreenState extends State<ConferencesCreateScreen> {
 
                         Padding(
                           padding: const EdgeInsets.all(15.0),
-                          child: Container(
+                          child: SizedBox(
                             height: 50.0,
                             width: MediaQuery.of(context).size.width * 0.85,
                             child: TextFormField(

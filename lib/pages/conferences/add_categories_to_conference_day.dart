@@ -17,7 +17,7 @@ class AddCategoryToConferenceDay extends StatefulWidget {
   final int conferenceId;
   final int conferenceDayId;
   const AddCategoryToConferenceDay(
-      {required this.conferenceId, required this.conferenceDayId});
+      {super.key, required this.conferenceId, required this.conferenceDayId});
 
   @override
   State<AddCategoryToConferenceDay> createState() =>
@@ -153,9 +153,9 @@ class _AddCategoryToConferenceDayState
             showBackIcon: false,
           ),
           body: Stack(children: [
-            BackgroundScrollView(),
+            const BackgroundScrollView(),
             _loading
-                ? Center(
+                ? const Center(
                     child: CircularProgressIndicator(),
                   )
                 : SingleChildScrollView(

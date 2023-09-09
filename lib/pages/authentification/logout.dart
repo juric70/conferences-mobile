@@ -25,7 +25,6 @@ class _LogoutScreenState extends State<LogoutScreen> {
   Future<void> _checkLoggedInStatus() async {
     await Future.delayed(Duration.zero);
     UserModel? user = await AuthModel().LoggedInUser();
-    print(user);
     setState(
       () {
         if (user == null) {
@@ -136,7 +135,7 @@ class _LogoutScreenState extends State<LogoutScreen> {
                         width: MediaQuery.of(context).size.width * 0.85,
                         child: ElevatedButton(
                           style: ElevatedButton.styleFrom(
-                            primary: const Color(0xffeadc48),
+                            backgroundColor: const Color(0xffeadc48),
                             padding: const EdgeInsets.symmetric(vertical: 16.0),
                             shape: RoundedRectangleBorder(
                               side: const BorderSide(

@@ -2,21 +2,21 @@ import 'package:conferences_mobile/model/category.dart';
 import 'package:conferences_mobile/model/timetable.dart';
 
 class ConferenceDay {
-  int id, day_number, price;
+  int id, day_number, price, conferenceId;
   String date, conference, date_of_conf_day;
   List<Timetable>? timetables;
   List<Category>? categories;
 
-  ConferenceDay({
-    this.id = 0,
-    this.day_number = 0,
-    this.price = 0,
-    this.date = '',
-    this.conference = '',
-    this.date_of_conf_day = '',
-    this.timetables,
-    this.categories,
-  });
+  ConferenceDay(
+      {this.id = 0,
+      this.day_number = 0,
+      this.price = 0,
+      this.date = '',
+      this.conference = '',
+      this.date_of_conf_day = '',
+      this.timetables,
+      this.categories,
+      this.conferenceId = 0});
 
   factory ConferenceDay.fromJson(Map<String, dynamic> json) {
     String startingDate = json['conference']['starting_date'] ?? '';
@@ -30,6 +30,7 @@ class ConferenceDay {
       date: json['date'] ?? '',
       conference: json['conference']['name'] ?? '',
       date_of_conf_day: conferenceDayDate.toString(),
+      conferenceId: json['conference']['id'] ?? 0,
     );
   }
 }
