@@ -4,27 +4,33 @@ import 'package:conferences_mobile/components/backgroundScrollView.dart';
 import 'package:conferences_mobile/components/customAppBar.dart';
 import 'package:conferences_mobile/components/drawer.dart';
 import 'package:conferences_mobile/model/auth.dart';
+import 'package:conferences_mobile/model/timetable.dart';
 import 'package:conferences_mobile/network/autentification_service.dart';
 import 'package:conferences_mobile/network/conference_service.dart';
 import 'package:conferences_mobile/network/timetable_service.dart';
-import 'package:conferences_mobile/pages/conferences/add_categories_to_conference_day.dart';
+import 'package:conferences_mobile/pages/conferences/timetables_details.dart';
 import 'package:flutter/material.dart';
 
-class TimetableCreateScreen extends StatefulWidget {
-  final int conferenceDayId;
+class TimetableEditScreen extends StatefulWidget {
   final int conferenceId;
-
-  const TimetableCreateScreen(
-      {super.key, required this.conferenceDayId, required this.conferenceId});
+  final int conferenceDayId;
+  final int timetableId;
+  const TimetableEditScreen({
+    super.key,
+    required this.conferenceDayId,
+    required this.conferenceId,
+    required this.timetableId,
+  });
 
   @override
-  State<TimetableCreateScreen> createState() => _TimetableCreateScreenState();
+  State<TimetableEditScreen> createState() => _TimetableEditScreenState();
 }
 
-class _TimetableCreateScreenState extends State<TimetableCreateScreen> {
+class _TimetableEditScreenState extends State<TimetableEditScreen> {
   bool isCreatorOfConference = false;
   UserModel? user;
   bool isLoading = false;
+  late Timetable _timetable;
   final TextEditingController _starttimeController = TextEditingController();
   final TextEditingController _endtimeController = TextEditingController();
   final TextEditingController _titleController = TextEditingController();
@@ -43,11 +49,29 @@ class _TimetableCreateScreenState extends State<TimetableCreateScreen> {
       _descriptionError,
       _availableSeatsError,
       _tutorError;
+  void _getTimetable(int id) {
+    TimetableService.getTimetable(id).then((timetable) {
+      setState(() {
+        _timetable = timetable;
+        _starttimeController.text = _timetable.startingTime!;
+        _endtimeController.text = _timetable.endingTime!;
+        _titleController.text = _timetable.title!;
+        _addressController.text = _timetable.address!;
+        _conferenceRoomController.text = _timetable.conferenceRoom!;
+        _descriptionController.text = _timetable.description!;
+        _availableSeatsController.text = _timetable.availableSeats.toString();
+        _tutorController.text = _timetable.hostMail!;
+
+        isLoading = false;
+      });
+    });
+  }
 
   @override
   void initState() {
     super.initState();
     _checkIsAutor();
+    _getTimetable(widget.timetableId);
   }
 
   Future<int> _createTimetable() async {
@@ -65,11 +89,12 @@ class _TimetableCreateScreenState extends State<TimetableCreateScreen> {
             await AuthentificationService.getUserByEmail(_tutorController.text),
       };
       final jsonData = jsonEncode(response);
-      String result = await TimetableService.createTimeTable(jsonData);
+      String result =
+          await TimetableService.editTimetable(jsonData, widget.timetableId);
       if (result == '200') {
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(
-            content: Text('Timetable created successfully!'),
+            content: Text('Timetable edited successfully!'),
             backgroundColor: Color(0xff4a23b2),
           ),
         );
@@ -192,7 +217,7 @@ class _TimetableCreateScreenState extends State<TimetableCreateScreen> {
                       Padding(
                         padding: const EdgeInsets.all(15.0),
                         child: Text(
-                          'Create timetable!'.toUpperCase(),
+                          'Edit timetable!'.toUpperCase(),
                           style: const TextStyle(
                             color: Colors.white,
                             fontSize: 20.0,
@@ -286,7 +311,7 @@ class _TimetableCreateScreenState extends State<TimetableCreateScreen> {
                               ),
                               focusedBorder: const OutlineInputBorder(
                                 borderSide: BorderSide(
-                                  color: Color(0xffbe2b61),
+                                  color: Color(0xffeadc48),
                                   width: 0.50,
                                 ),
                               ),
@@ -498,58 +523,19 @@ class _TimetableCreateScreenState extends State<TimetableCreateScreen> {
                                   if (res == 1) {
                                     Navigator.of(context).push(
                                       MaterialPageRoute(
-                                        builder: (context) {
-                                          return TimetableCreateScreen(
-                                            conferenceDayId:
-                                                widget.conferenceDayId,
-                                            conferenceId: widget.conferenceId,
-                                          );
-                                        },
-                                      ),
-                                    );
-                                  }
-                                },
-                                child: const Text(
-                                  'Create more timetables!',
-                                ),
-                              ),
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.all(6.0),
-                            child: SizedBox(
-                              height: 50.0,
-                              width: MediaQuery.of(context).size.width * 0.42,
-                              child: ElevatedButton(
-                                style: ElevatedButton.styleFrom(
-                                  backgroundColor: const Color(0xffbe2b61),
-                                  padding: const EdgeInsets.symmetric(
-                                      vertical: 16.0),
-                                  shape: RoundedRectangleBorder(
-                                    side: const BorderSide(
-                                      color: Color(0xffbb2a5f),
-                                      width: 2.0,
-                                    ),
-                                    borderRadius: BorderRadius.circular(8.0),
-                                  ),
-                                ),
-                                onPressed: () async {
-                                  int res = await _createTimetable();
-                                  if (res == 1) {
-                                    Navigator.of(context).push(
-                                      MaterialPageRoute(
                                         builder: (context) =>
-                                            AddCategoryToConferenceDay(
+                                            TimetableDetailScreen(
                                           conferenceId: widget.conferenceId,
                                           conferenceDayId:
                                               widget.conferenceDayId,
+                                          timetableId: _timetable.id,
                                         ),
                                       ),
                                     );
                                   }
                                 },
                                 child: const Text(
-                                  'Next step - add categories!',
+                                  'Edit!',
                                 ),
                               ),
                             ),

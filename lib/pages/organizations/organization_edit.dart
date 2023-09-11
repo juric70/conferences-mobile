@@ -208,7 +208,7 @@ class _OrganizationEditScreenState extends State<OrganizationEditScreen> {
                     Padding(
                       padding: const EdgeInsets.all(15.0),
                       child: Text(
-                        'Create your organization!'.toUpperCase(),
+                        'Edit organization!'.toUpperCase(),
                         style: const TextStyle(
                           color: Colors.white,
                           fontSize: 20.0,
@@ -225,15 +225,14 @@ class _OrganizationEditScreenState extends State<OrganizationEditScreen> {
                           decoration: InputDecoration(
                             labelText: 'Name',
                             errorText: _nameError,
-                            labelStyle:
-                                const TextStyle(color: Color(0xffbe2b61)),
+                            labelStyle: const TextStyle(color: Colors.white),
                             enabledBorder: const OutlineInputBorder(
                               borderSide: BorderSide(
-                                  color: Color(0xff4a23b2), width: 1.5),
+                                  color: Color(0xffbe2b61), width: 1.5),
                             ),
                             focusedBorder: const OutlineInputBorder(
                               borderSide: BorderSide(
-                                color: Color(0xffeadc48),
+                                color: Color(0xffbe2b61),
                                 width: 0.50,
                               ),
                             ),
@@ -245,7 +244,7 @@ class _OrganizationEditScreenState extends State<OrganizationEditScreen> {
                             filled: true,
                           ),
                           style: const TextStyle(
-                              color: Colors.amber, fontSize: 18.0),
+                              color: Color(0xffbe2b61), fontSize: 18.0),
                         ),
                       ),
                     ),
@@ -258,15 +257,14 @@ class _OrganizationEditScreenState extends State<OrganizationEditScreen> {
                           decoration: InputDecoration(
                             labelText: 'Description',
                             errorText: _descriptionError,
-                            labelStyle:
-                                const TextStyle(color: Color(0xffbe2b61)),
+                            labelStyle: const TextStyle(color: Colors.white),
                             enabledBorder: const OutlineInputBorder(
                               borderSide: BorderSide(
-                                  color: Color(0xff4a23b2), width: 1.5),
+                                  color: Color(0xffbe2b61), width: 1.5),
                             ),
                             focusedBorder: const OutlineInputBorder(
                               borderSide: BorderSide(
-                                color: Color(0xffeadc48),
+                                color: Color(0xffbe2b61),
                                 width: 0.50,
                               ),
                             ),
@@ -278,7 +276,7 @@ class _OrganizationEditScreenState extends State<OrganizationEditScreen> {
                             filled: true,
                           ),
                           style: const TextStyle(
-                              color: Colors.amber, fontSize: 18.0),
+                              color: Color(0xffbe2b61), fontSize: 18.0),
                         ),
                       ),
                     ),
@@ -291,15 +289,14 @@ class _OrganizationEditScreenState extends State<OrganizationEditScreen> {
                           decoration: InputDecoration(
                             labelText: 'Address',
                             errorText: _addressError,
-                            labelStyle:
-                                const TextStyle(color: Color(0xffbe2b61)),
+                            labelStyle: const TextStyle(color: Colors.white),
                             enabledBorder: const OutlineInputBorder(
                               borderSide: BorderSide(
-                                  color: Color(0xff4a23b2), width: 1.5),
+                                  color: Color(0xffbe2b61), width: 1.5),
                             ),
                             focusedBorder: const OutlineInputBorder(
                               borderSide: BorderSide(
-                                color: Color(0xffeadc48),
+                                color: Color(0xffbe2b61),
                                 width: 0.50,
                               ),
                             ),
@@ -311,7 +308,7 @@ class _OrganizationEditScreenState extends State<OrganizationEditScreen> {
                             filled: true,
                           ),
                           style: const TextStyle(
-                              color: Colors.amber, fontSize: 18.0),
+                              color: Color(0xffbe2b61), fontSize: 18.0),
                         ),
                       ),
                     ),
@@ -322,7 +319,7 @@ class _OrganizationEditScreenState extends State<OrganizationEditScreen> {
                         decoration: BoxDecoration(
                           color: const Color(0XFF1A1A1A),
                           border: Border.all(
-                            color: const Color(0xff4a23b2),
+                            color: const Color(0xffbe2b61),
                             width: 2.0,
                           ),
                           borderRadius: BorderRadius.circular(8.0),
@@ -340,7 +337,7 @@ class _OrganizationEditScreenState extends State<OrganizationEditScreen> {
                                 child: Text(
                                   'Select city ',
                                   style: TextStyle(
-                                    color: Color((0xffbe2b61)),
+                                    color: Colors.white,
                                   ),
                                 ),
                               ),
@@ -373,7 +370,7 @@ class _OrganizationEditScreenState extends State<OrganizationEditScreen> {
                         decoration: BoxDecoration(
                           color: const Color(0XFF1A1A1A),
                           border: Border.all(
-                            color: const Color(0xff4a23b2),
+                            color: const Color(0xffbe2b61),
                             width: 2.0,
                           ),
                           borderRadius: BorderRadius.circular(8.0),
@@ -391,7 +388,7 @@ class _OrganizationEditScreenState extends State<OrganizationEditScreen> {
                                 child: Text(
                                   'Select organization type ',
                                   style: TextStyle(
-                                    color: Color((0xffbe2b61)),
+                                    color: Colors.white,
                                   ),
                                 ),
                               ),

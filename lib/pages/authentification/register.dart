@@ -55,8 +55,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
         'role_id': roleId
       };
       final jsonData = jsonEncode(response);
-      String result =
-          await AuthentificationService.registerUser(jsonData, context);
+      String result = await AuthentificationService.registerUser(jsonData);
       if (result != '') {
         final Map<String, dynamic> errorData = jsonDecode(result);
         setState(() {
@@ -177,15 +176,14 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                             decoration: InputDecoration(
                               labelText: 'Name',
                               errorText: _nameError,
-                              labelStyle:
-                                  const TextStyle(color: Color(0xffbe2b61)),
+                              labelStyle: const TextStyle(color: Colors.white),
                               enabledBorder: const OutlineInputBorder(
                                 borderSide: BorderSide(
-                                    color: Color(0xff4a23b2), width: 1.5),
+                                    color: Color(0xffbe2b61), width: 1.5),
                               ),
                               focusedBorder: const OutlineInputBorder(
                                 borderSide: BorderSide(
-                                  color: Color(0xffeadc48),
+                                  color: Color(0xffbe2b61),
                                   width: 0.50,
                                 ),
                               ),
@@ -197,7 +195,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                               filled: true,
                             ),
                             style: const TextStyle(
-                                color: Colors.amber, fontSize: 18.0),
+                                color: Color(0xffbe2b61), fontSize: 18.0),
                           ),
                         ),
                       ),
@@ -210,15 +208,14 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                             decoration: InputDecoration(
                               labelText: 'Email',
                               errorText: _emailError,
-                              labelStyle:
-                                  const TextStyle(color: Color(0xffbe2b61)),
+                              labelStyle: const TextStyle(color: Colors.white),
                               enabledBorder: const OutlineInputBorder(
                                 borderSide: BorderSide(
-                                    color: Color(0xff4a23b2), width: 1.5),
+                                    color: Color(0xffbe2b61), width: 1.5),
                               ),
                               focusedBorder: const OutlineInputBorder(
                                 borderSide: BorderSide(
-                                  color: Color(0xffeadc48),
+                                  color: Color(0xffbe2b61),
                                   width: 0.50,
                                 ),
                               ),
@@ -230,7 +227,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                               filled: true,
                             ),
                             style: const TextStyle(
-                                color: Colors.amber, fontSize: 18.0),
+                                color: Color(0xffbe2b61), fontSize: 18.0),
                           ),
                         ),
                       ),
@@ -244,15 +241,14 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                             decoration: InputDecoration(
                               labelText: 'Password',
                               errorText: _passwordError,
-                              labelStyle:
-                                  const TextStyle(color: Color(0xffbe2b61)),
+                              labelStyle: const TextStyle(color: Colors.white),
                               enabledBorder: const OutlineInputBorder(
                                 borderSide: BorderSide(
-                                    color: Color(0xff4a23b2), width: 1.5),
+                                    color: Color(0xffbe2b61), width: 1.5),
                               ),
                               focusedBorder: const OutlineInputBorder(
                                 borderSide: BorderSide(
-                                  color: Color(0xffeadc48),
+                                  color: Color(0xffbe2b61),
                                   width: 0.50,
                                 ),
                               ),
@@ -264,7 +260,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                               filled: true,
                             ),
                             style: const TextStyle(
-                                color: Colors.amber, fontSize: 20.0),
+                                color: Color(0xffbe2b61), fontSize: 20.0),
                           ),
                         ),
                       ),
@@ -278,15 +274,14 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                             decoration: InputDecoration(
                               labelText: 'Password confirmation',
                               errorText: _passwordError,
-                              labelStyle:
-                                  const TextStyle(color: Color(0xffbe2b61)),
+                              labelStyle: const TextStyle(color: Colors.white),
                               enabledBorder: const OutlineInputBorder(
                                 borderSide: BorderSide(
-                                    color: Color(0xff4a23b2), width: 1.5),
+                                    color: Color(0xffbe2b61), width: 1.5),
                               ),
                               focusedBorder: const OutlineInputBorder(
                                 borderSide: BorderSide(
-                                  color: Color(0xffeadc48),
+                                  color: Color(0xffbe2b61),
                                   width: 0.50,
                                 ),
                               ),
@@ -298,7 +293,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                               filled: true,
                             ),
                             style: const TextStyle(
-                                color: Colors.amber, fontSize: 20.0),
+                                color: Color(0xffbe2b61), fontSize: 20.0),
                           ),
                         ),
                       ),
@@ -311,15 +306,14 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                             decoration: InputDecoration(
                               labelText: 'Telephone number',
                               errorText: _telephoneNumberError,
-                              labelStyle:
-                                  const TextStyle(color: Color(0xffbe2b61)),
+                              labelStyle: const TextStyle(color: Colors.white),
                               enabledBorder: const OutlineInputBorder(
                                 borderSide: BorderSide(
-                                    color: Color(0xff4a23b2), width: 1.5),
+                                    color: Color(0xffbe2b61), width: 1.5),
                               ),
                               focusedBorder: const OutlineInputBorder(
                                 borderSide: BorderSide(
-                                  color: Color(0xffeadc48),
+                                  color: Color(0xffbe2b61),
                                   width: 0.50,
                                 ),
                               ),
@@ -331,7 +325,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                               filled: true,
                             ),
                             style: const TextStyle(
-                                color: Colors.amber, fontSize: 18.0),
+                                color: Color(0xffbe2b61), fontSize: 18.0),
                           ),
                         ),
                       ),
@@ -344,15 +338,14 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                             decoration: InputDecoration(
                               labelText: 'Address',
                               errorText: _addressError,
-                              labelStyle:
-                                  const TextStyle(color: Color(0xffbe2b61)),
+                              labelStyle: const TextStyle(color: Colors.white),
                               enabledBorder: const OutlineInputBorder(
                                 borderSide: BorderSide(
-                                    color: Color(0xff4a23b2), width: 1.5),
+                                    color: Color(0xffbe2b61), width: 1.5),
                               ),
                               focusedBorder: const OutlineInputBorder(
                                 borderSide: BorderSide(
-                                  color: Color(0xffeadc48),
+                                  color: Color(0xffbe2b61),
                                   width: 0.50,
                                 ),
                               ),
@@ -364,7 +357,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                               filled: true,
                             ),
                             style: const TextStyle(
-                                color: Colors.amber, fontSize: 18.0),
+                                color: Color(0xffbe2b61), fontSize: 18.0),
                           ),
                         ),
                       ),
@@ -377,23 +370,23 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                             border: Border(
                               bottom: BorderSide(
                                 color: _cityError == '' || _cityError == null
-                                    ? const Color(0xff4a23b2)
+                                    ? const Color(0xffbe2b61)
                                     : Colors.red,
                               ),
                               top: BorderSide(
-                                color: const Color(0xff4a23b2),
+                                color: const Color(0xffbe2b61),
                                 width: _cityError == '' || _cityError == null
                                     ? 2.0
                                     : 0.0,
                               ),
                               left: BorderSide(
-                                color: const Color(0xff4a23b2),
+                                color: const Color(0xffbe2b61),
                                 width: _cityError == '' || _cityError == null
                                     ? 2.0
                                     : 0.0,
                               ),
                               right: BorderSide(
-                                color: const Color(0xff4a23b2),
+                                color: const Color(0xffbe2b61),
                                 width: _cityError == '' || _cityError == null
                                     ? 2.0
                                     : 0.0,
@@ -414,7 +407,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                                   child: Text(
                                     'Odaberi grad ',
                                     style: TextStyle(
-                                      color: Color((0xffbe2b61)),
+                                      color: Colors.white,
                                     ),
                                   ),
                                 ),

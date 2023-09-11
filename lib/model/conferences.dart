@@ -5,7 +5,7 @@ import 'package:conferences_mobile/model/timetable.dart';
 import 'package:flutter/material.dart';
 
 class Conference {
-  int id;
+  int id, cityId;
   String name, description, organization, city, starting_date, ending_date;
   List<Category>? categories;
   List<ConferenceDay>? conferences_day;
@@ -13,6 +13,7 @@ class Conference {
 
   Conference(
       {this.id = 0,
+      this.cityId = 0,
       this.name = '',
       this.description = '',
       this.city = '',
@@ -95,6 +96,7 @@ class Conference {
         name: json['name'] ?? '',
         description: json['description'] ?? '',
         city: json['city']['name'] ?? '',
+        cityId: json['city']['id'] ?? 0,
         organization: json['organization']['name'] ?? '',
         starting_date: json['starting_date'] ?? '',
         ending_date: json['ending_date'] ?? '',

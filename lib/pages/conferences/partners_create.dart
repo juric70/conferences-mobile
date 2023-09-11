@@ -208,7 +208,7 @@ class _PartnersAddScreenState extends State<PartnersAddScreen> {
                             title: Text(
                               'Select days of conference You want to book!',
                               style: TextStyle(
-                                  color: const Color(0xff4a23b2),
+                                  color: const Color(0xffbe2b61),
                                   shadows: [
                                     Shadow(
                                       offset: const Offset(0.50, 0.50),
@@ -221,13 +221,13 @@ class _PartnersAddScreenState extends State<PartnersAddScreen> {
                             selectedColor: const Color(0xff4a23b2),
                             decoration: BoxDecoration(
                               border: Border.all(
-                                  color: const Color(0xff4a23b2), width: 2.0),
+                                  color: const Color(0xffbe2b61), width: 2.0),
                               borderRadius: BorderRadius.circular(1.0),
                               color: const Color(0xff1a1a1a),
                             ),
                             buttonIcon: const Icon(
                               Icons.arrow_downward,
-                              color: Color(0xff4a23b2),
+                              color: Color(0xffbe2b61),
                             ),
                           ),
                         ),
@@ -239,7 +239,7 @@ class _PartnersAddScreenState extends State<PartnersAddScreen> {
                           decoration: BoxDecoration(
                             color: const Color(0XFF1A1A1A),
                             border: Border.all(
-                              color: const Color(0xff4a23b2),
+                              color: const Color(0xffbe2b61),
                               width: 2.0,
                             ),
                             borderRadius: BorderRadius.circular(8.0),
@@ -294,11 +294,11 @@ class _PartnersAddScreenState extends State<PartnersAddScreen> {
                               labelStyle: TextStyle(color: Color(0xffbe2b61)),
                               enabledBorder: OutlineInputBorder(
                                 borderSide: BorderSide(
-                                    color: Color(0xff4a23b2), width: 1.5),
+                                    color: Color(0xffbe2b61), width: 1.5),
                               ),
                               focusedBorder: OutlineInputBorder(
                                 borderSide: BorderSide(
-                                  color: Color(0xffeadc48),
+                                  color: Color(0xffbe2b61),
                                   width: 0.50,
                                 ),
                               ),
@@ -310,7 +310,7 @@ class _PartnersAddScreenState extends State<PartnersAddScreen> {
                               filled: true,
                             ),
                             style: const TextStyle(
-                                color: Colors.amber, fontSize: 18.0),
+                                color: Color(0xffbe2b61), fontSize: 18.0),
                           ),
                         ),
                       ),

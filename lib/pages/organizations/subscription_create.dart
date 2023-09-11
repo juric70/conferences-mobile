@@ -157,120 +157,147 @@ class _SubscriptionCreateScreenState extends State<SubscriptionCreateScreen> {
                     child: CircularProgressIndicator(),
                   )
                 : SingleChildScrollView(
-                    child: Column(
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.all(15.0),
-                          child: Center(
-                            child: Text(
-                              _organizationsOffer.kind,
-                              style: const TextStyle(
-                                color: Colors.white,
-                                fontSize: 20.0,
-                                fontWeight: FontWeight.w600,
-                              ),
+                    child: Padding(
+                      padding: const EdgeInsets.all(15.0),
+                      child: Center(
+                        child: Container(
+                          width: MediaQuery.of(context).size.width * 0.8,
+                          decoration: BoxDecoration(
+                            border: Border.all(
+                              color: Color(0xffeadc48),
                             ),
+                            borderRadius: BorderRadius.circular(10.0),
                           ),
-                        ),
-                        Center(
-                          child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Text(
-                              _organizationsOffer.description,
-                              style: const TextStyle(color: Colors.white),
-                            ),
-                          ),
-                        ),
-                        Center(
-                          child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Text(
-                              'Nuber of conference to publish: ${_organizationsOffer.publishable_conferences} for ${_organizationsOffer.price}€',
-                              style: const TextStyle(
-                                color: Colors.white,
-                                fontSize: 17.0,
+                          child: Column(
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Center(
+                                  child: Text(
+                                    _organizationsOffer.kind,
+                                    style: const TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 20.0,
+                                      fontWeight: FontWeight.w600,
+                                    ),
+                                  ),
+                                ),
                               ),
-                            ),
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.all(15.0),
-                          child: Container(
-                            width: MediaQuery.of(context).size.width * 0.85,
-                            decoration: BoxDecoration(
-                              color: const Color(0XFF1A1A1A),
-                              border: Border.all(
-                                color: const Color(0xff4a23b2),
+                              Divider(
+                                color: Color(0xffeadc48),
                               ),
-                              borderRadius: BorderRadius.circular(8.0),
-                            ),
-                            child: Theme(
-                              data: Theme.of(context).copyWith(
-                                canvasColor: const Color(0xff1A1A1A),
+                              Center(
+                                child: Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Text(
+                                    _organizationsOffer.description,
+                                    style: const TextStyle(
+                                      color: Color(0xffeadc48),
+                                    ),
+                                    textAlign: TextAlign.center,
+                                  ),
+                                ),
                               ),
-                              child: DropdownButtonHideUnderline(
-                                child: DropdownButton<int?>(
-                                  value: selectedOrganization,
-                                  hint: const Padding(
-                                    padding: EdgeInsets.fromLTRB(
-                                        16.0, 8.0, 16.0, 8.0),
-                                    child: Text(
-                                      'Select your organization ',
-                                      style: TextStyle(
-                                        color: Color((0xffbe2b61)),
+                              Center(
+                                child: Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Text(
+                                    'Nuber of conference to publish: ${_organizationsOffer.publishable_conferences} for ${_organizationsOffer.price}€',
+                                    style: const TextStyle(
+                                      color: Color(0xffeadc48),
+                                      fontSize: 20.0,
+                                    ),
+                                    textAlign: TextAlign.center,
+                                  ),
+                                ),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.all(15.0),
+                                child: Container(
+                                  width:
+                                      MediaQuery.of(context).size.width * 0.85,
+                                  decoration: BoxDecoration(
+                                    color: const Color(0XFF1A1A1A),
+                                    border: Border.all(
+                                      color: const Color(0xffeadc48),
+                                    ),
+                                    borderRadius: BorderRadius.circular(8.0),
+                                  ),
+                                  child: Theme(
+                                    data: Theme.of(context).copyWith(
+                                      canvasColor: const Color(0xff1A1A1A),
+                                    ),
+                                    child: DropdownButtonHideUnderline(
+                                      child: DropdownButton<int?>(
+                                        value: selectedOrganization,
+                                        hint: const Padding(
+                                          padding: EdgeInsets.fromLTRB(
+                                              16.0, 8.0, 16.0, 8.0),
+                                          child: Text(
+                                            'Select your organization ',
+                                            style: TextStyle(
+                                              color: Color((0xffeadc48)),
+                                            ),
+                                          ),
+                                        ),
+                                        onChanged: (int? newValue) {
+                                          setState(() {
+                                            selectedOrganization = newValue!;
+                                          });
+                                        },
+                                        items: _organizations
+                                            .map<DropdownMenuItem<int?>>(
+                                                (Organization organization) {
+                                          return DropdownMenuItem<int?>(
+                                            value: organization.id,
+                                            child: Text(
+                                              organization.name,
+                                              style: const TextStyle(
+                                                color: Color(0xffeadc48),
+                                              ),
+                                            ),
+                                          );
+                                        }).toList(),
                                       ),
                                     ),
                                   ),
-                                  onChanged: (int? newValue) {
-                                    setState(() {
-                                      selectedOrganization = newValue!;
-                                    });
-                                  },
-                                  items: _organizations
-                                      .map<DropdownMenuItem<int?>>(
-                                          (Organization organization) {
-                                    return DropdownMenuItem<int?>(
-                                      value: organization.id,
-                                      child: Text(
-                                        organization.name,
-                                        style: const TextStyle(
-                                          color: Color(0xffbe2b61),
+                                ),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.all(15.0),
+                                child: SizedBox(
+                                  width:
+                                      MediaQuery.of(context).size.width * 0.85,
+                                  child: ElevatedButton(
+                                    style: ElevatedButton.styleFrom(
+                                      backgroundColor: const Color(0xffeadc48),
+                                      padding: const EdgeInsets.symmetric(
+                                          vertical: 16.0),
+                                      shape: RoundedRectangleBorder(
+                                        side: const BorderSide(
+                                          color: Color(0xffb7a915),
+                                          width: 2.0,
                                         ),
+                                        borderRadius:
+                                            BorderRadius.circular(8.0),
                                       ),
-                                    );
-                                  }).toList(),
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.all(15.0),
-                          child: SizedBox(
-                            width: MediaQuery.of(context).size.width * 0.85,
-                            child: ElevatedButton(
-                              style: ElevatedButton.styleFrom(
-                                backgroundColor: const Color(0xffbe2b61),
-                                padding:
-                                    const EdgeInsets.symmetric(vertical: 16.0),
-                                shape: RoundedRectangleBorder(
-                                  side: const BorderSide(
-                                    color: Color(0xffbb2a5f),
-                                    width: 2.0,
+                                    ),
+                                    onPressed: () {
+                                      _createSubscription();
+                                    },
+                                    child: const Text(
+                                      'Buy subscription!',
+                                      style: TextStyle(
+                                        color: Color(0xff2a2a2a),
+                                      ),
+                                    ),
                                   ),
-                                  borderRadius: BorderRadius.circular(8.0),
                                 ),
                               ),
-                              onPressed: () {
-                                _createSubscription();
-                              },
-                              child: const Text(
-                                'Buy subscription!',
-                              ),
-                            ),
+                            ],
                           ),
                         ),
-                      ],
+                      ),
                     ),
                   )
           ]),

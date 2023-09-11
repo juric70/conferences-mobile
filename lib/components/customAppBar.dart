@@ -21,20 +21,20 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
         child: showBackIcon
             ? const Center(
                 child: Text(
-                  'Andina slavna apliacija',
+                  'CONFERENCE HUB',
                   style: TextStyle(
                       color: Colors.white, fontWeight: FontWeight.bold),
                 ),
               )
             : const Text(
-                'Andina  apliacija',
+                'CONFERENCE HUB',
                 style:
                     TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
               ),
       ),
-      backgroundColor: const Color(0xFF2A2A2A).withOpacity(0.8),
+      backgroundColor: const Color(0xFF2A2A2A),
       elevation: 2,
-      shadowColor: Colors.grey[850],
+      shadowColor: Color(0xff1a1a1a),
       leading: showBackIcon
           ? IconButton(
               onPressed: onBackIconPressed,

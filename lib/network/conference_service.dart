@@ -20,7 +20,7 @@ class ConferenceServise {
         return List.empty();
       }
     } catch (e) {
-      return Future.error(e);
+      throw Future.error('Neka poruka $e');
     }
   }
 
@@ -46,7 +46,8 @@ class ConferenceServise {
           '${ApiConstances.baseUrl}conferences/$conferenceId/creator'));
       if (response.statusCode == 200) {
         final data = jsonDecode(response.body);
-        return data;
+        int res = data;
+        return res;
       } else {
         return -1;
       }
@@ -166,6 +167,28 @@ class ConferenceServise {
     }
   }
 
+  static Future<String> editConference(String data, int id) async {
+    final response = await http.put(
+      Uri.parse('${ApiConstances.baseUrl}conferences/$id'),
+      body: data,
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+        'Cookie': 'laravel_session=cookie_user',
+      },
+    );
+    try {
+      if (response.statusCode == 200) {
+        return '200';
+      } else if (response.statusCode == 400) {
+        return '-1';
+      } else {
+        return response.body;
+      }
+    } catch (e) {
+      throw Future.error(e);
+    }
+  }
+
   static Future<String> createPartners(int id, String data) async {
     final response = await http.post(
       Uri.parse('${ApiConstances.baseUrl}conferences/$id/partners'),
@@ -222,6 +245,23 @@ class ConferenceServise {
       }
     } catch (e) {
       return Future.error(e);
+    }
+  }
+
+  static Future<List<Conference>> getConferencesByUser(int id) async {
+    try {
+      final response = await http
+          .get(Uri.parse('${ApiConstances.baseUrl}conferences/$id/user'));
+      if (response.statusCode == 200) {
+        final List<dynamic> data = jsonDecode(response.body);
+        final List<Conference> conference =
+            data.map((json) => Conference.fromJson(json)).toList();
+        return conference;
+      } else {
+        return List.empty();
+      }
+    } catch (e) {
+      throw Future.error(e);
     }
   }
 }

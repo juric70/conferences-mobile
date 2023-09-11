@@ -340,8 +340,8 @@ class _ConferencesDetailScreenState extends State<ConferencesDetailScreen> {
                                                 padding:
                                                     const EdgeInsets.all(5.0),
                                                 child: Container(
-                                                  width: 58.0,
-                                                  height: 58.0,
+                                                  width: 60.0,
+                                                  height: 60.0,
                                                   decoration: BoxDecoration(
                                                     border: Border.all(
                                                       color: category.color!,
@@ -352,11 +352,18 @@ class _ConferencesDetailScreenState extends State<ConferencesDetailScreen> {
                                                             80.0),
                                                   ),
                                                   child: Center(
-                                                    child: Text(
-                                                      category.name,
-                                                      style: TextStyle(
-                                                        color: category.color,
-                                                        fontSize: 11.0,
+                                                    child: Padding(
+                                                      padding:
+                                                          const EdgeInsets.all(
+                                                              4.0),
+                                                      child: Text(
+                                                        category.name,
+                                                        style: TextStyle(
+                                                          color: category.color,
+                                                          fontSize: 12.0,
+                                                        ),
+                                                        textAlign:
+                                                            TextAlign.center,
                                                       ),
                                                     ),
                                                   ),

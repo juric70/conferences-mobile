@@ -137,6 +137,20 @@ class _MyDrawerState extends State<MyDrawer> {
                     height: 2,
                     thickness: 3,
                   ),
+                  ListTile(
+                    title: const Text(
+                      'My conferences',
+                      style: TextStyle(color: Colors.white),
+                    ),
+                    onTap: () {
+                      Navigator.of(context).pushNamed('/conferencesForCreator');
+                    },
+                  ),
+                  const Divider(
+                    color: Color(0xFF4924b6),
+                    height: 2,
+                    thickness: 3,
+                  ),
                 ],
               ),
             if (isLoggedIn == true)

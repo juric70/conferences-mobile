@@ -192,15 +192,16 @@ class _OrganizationCreateScreenState extends State<OrganizationCreateScreen> {
                           decoration: InputDecoration(
                             labelText: 'Name',
                             errorText: _nameError,
-                            labelStyle:
-                                const TextStyle(color: Color(0xffbe2b61)),
+                            labelStyle: const TextStyle(
+                              color: Colors.white,
+                            ),
                             enabledBorder: const OutlineInputBorder(
                               borderSide: BorderSide(
-                                  color: Color(0xff4a23b2), width: 1.5),
+                                  color: Color(0xffbe2b61), width: 1.5),
                             ),
                             focusedBorder: const OutlineInputBorder(
                               borderSide: BorderSide(
-                                color: Color(0xffeadc48),
+                                color: Color(0xffbe2b61),
                                 width: 0.50,
                               ),
                             ),
@@ -212,7 +213,7 @@ class _OrganizationCreateScreenState extends State<OrganizationCreateScreen> {
                             filled: true,
                           ),
                           style: const TextStyle(
-                              color: Colors.amber, fontSize: 18.0),
+                              color: Color(0xffbe2b61), fontSize: 18.0),
                         ),
                       ),
                     ),
@@ -225,15 +226,16 @@ class _OrganizationCreateScreenState extends State<OrganizationCreateScreen> {
                           decoration: InputDecoration(
                             labelText: 'Description',
                             errorText: _descriptionError,
-                            labelStyle:
-                                const TextStyle(color: Color(0xffbe2b61)),
+                            labelStyle: const TextStyle(
+                              color: Colors.white,
+                            ),
                             enabledBorder: const OutlineInputBorder(
                               borderSide: BorderSide(
-                                  color: Color(0xff4a23b2), width: 1.5),
+                                  color: Color(0xffbe2b61), width: 1.5),
                             ),
                             focusedBorder: const OutlineInputBorder(
                               borderSide: BorderSide(
-                                color: Color(0xffeadc48),
+                                color: Color(0xffbe2b61),
                                 width: 0.50,
                               ),
                             ),
@@ -245,7 +247,7 @@ class _OrganizationCreateScreenState extends State<OrganizationCreateScreen> {
                             filled: true,
                           ),
                           style: const TextStyle(
-                              color: Colors.amber, fontSize: 18.0),
+                              color: Color(0xffbe2b61), fontSize: 18.0),
                         ),
                       ),
                     ),
@@ -258,15 +260,14 @@ class _OrganizationCreateScreenState extends State<OrganizationCreateScreen> {
                           decoration: InputDecoration(
                             labelText: 'Address',
                             errorText: _addressError,
-                            labelStyle:
-                                const TextStyle(color: Color(0xffbe2b61)),
+                            labelStyle: const TextStyle(color: Colors.white),
                             enabledBorder: const OutlineInputBorder(
                               borderSide: BorderSide(
-                                  color: Color(0xff4a23b2), width: 1.5),
+                                  color: Color(0xffbe2b61), width: 1.5),
                             ),
                             focusedBorder: const OutlineInputBorder(
                               borderSide: BorderSide(
-                                color: Color(0xffeadc48),
+                                color: Color(0xffbe2b61),
                                 width: 0.50,
                               ),
                             ),
@@ -278,7 +279,7 @@ class _OrganizationCreateScreenState extends State<OrganizationCreateScreen> {
                             filled: true,
                           ),
                           style: const TextStyle(
-                              color: Colors.amber, fontSize: 18.0),
+                              color: Color(0xffbe2b61), fontSize: 18.0),
                         ),
                       ),
                     ),
@@ -289,7 +290,7 @@ class _OrganizationCreateScreenState extends State<OrganizationCreateScreen> {
                         decoration: BoxDecoration(
                           color: const Color(0XFF1A1A1A),
                           border: Border.all(
-                            color: const Color(0xff4a23b2),
+                            color: const Color(0xffbe2b61),
                             width: 2.0,
                           ),
                           borderRadius: BorderRadius.circular(8.0),
@@ -307,7 +308,7 @@ class _OrganizationCreateScreenState extends State<OrganizationCreateScreen> {
                                 child: Text(
                                   'Select city ',
                                   style: TextStyle(
-                                    color: Color((0xffbe2b61)),
+                                    color: Colors.white,
                                   ),
                                 ),
                               ),
@@ -340,7 +341,7 @@ class _OrganizationCreateScreenState extends State<OrganizationCreateScreen> {
                         decoration: BoxDecoration(
                           color: const Color(0XFF1A1A1A),
                           border: Border.all(
-                            color: const Color(0xff4a23b2),
+                            color: const Color(0xffbe2b61),
                             width: 2.0,
                           ),
                           borderRadius: BorderRadius.circular(8.0),
@@ -358,7 +359,7 @@ class _OrganizationCreateScreenState extends State<OrganizationCreateScreen> {
                                 child: Text(
                                   'Select organization type ',
                                   style: TextStyle(
-                                    color: Color((0xffbe2b61)),
+                                    color: Colors.white,
                                   ),
                                 ),
                               ),

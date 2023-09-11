@@ -5,41 +5,53 @@ import 'package:conferences_mobile/components/customAppBar.dart';
 import 'package:conferences_mobile/components/drawer.dart';
 import 'package:conferences_mobile/model/auth.dart';
 import 'package:conferences_mobile/model/category.dart';
+import 'package:conferences_mobile/model/conference_day.dart';
 import 'package:conferences_mobile/network/category_service.dart';
 import 'package:conferences_mobile/network/conference_day_service.dart';
 import 'package:conferences_mobile/network/conference_service.dart';
-import 'package:conferences_mobile/pages/conferences/conference_days_create.dart';
-import 'package:conferences_mobile/pages/conferences/partners_create.dart';
+import 'package:conferences_mobile/pages/conferences/conference_day_detail_for_creator.dart';
 import 'package:flutter/material.dart';
-import 'package:multi_select_flutter/multi_select_flutter.dart';
+import 'package:multi_select_flutter/dialog/multi_select_dialog_field.dart';
+import 'package:multi_select_flutter/util/multi_select_item.dart';
+import 'package:multi_select_flutter/util/multi_select_list_type.dart';
 
-class AddCategoryToConferenceDay extends StatefulWidget {
+class EditCategoriesOfConferenceDay extends StatefulWidget {
   final int conferenceId;
   final int conferenceDayId;
-  const AddCategoryToConferenceDay(
+  const EditCategoriesOfConferenceDay(
       {super.key, required this.conferenceId, required this.conferenceDayId});
 
   @override
-  State<AddCategoryToConferenceDay> createState() =>
-      _AddCategoryToConferenceDayState();
+  State<EditCategoriesOfConferenceDay> createState() =>
+      _EditCategoriesOfConferenceDayState();
 }
 
-class _AddCategoryToConferenceDayState
-    extends State<AddCategoryToConferenceDay> {
+class _EditCategoriesOfConferenceDayState
+    extends State<EditCategoriesOfConferenceDay> {
   bool isCreatorOfConference = false;
   bool _loading = true;
   List<int> selectedIds = [];
   UserModel? user;
   List<Category> _categories = [];
-
+  late ConferenceDay _conferenceDay;
   @override
   void initState() {
     super.initState();
     _checkIsAutor();
     _getCategories();
+    _getConferenceDayDetails(widget.conferenceDayId);
   }
 
-  _addCategoryToConferenceDay() async {
+  void _getConferenceDayDetails(int id) {
+    ConferenceDayService.getConferenceDayDetail(id).then((conferenceDay) {
+      setState(() {
+        _conferenceDay = conferenceDay;
+        _loading = false;
+      });
+    });
+  }
+
+  _editCategoryInConferenceDay() async {
     try {
       final response = {'categories': selectedIds};
       final jsonData = jsonEncode(response);
@@ -165,12 +177,14 @@ class _AddCategoryToConferenceDayState
                           Padding(
                             padding: const EdgeInsets.all(15.0),
                             child: Text(
-                              'Add categories for conference!'.toUpperCase(),
+                              'Edit categories for conference day!'
+                                  .toUpperCase(),
                               style: const TextStyle(
                                 color: Colors.white,
                                 fontSize: 20.0,
                                 fontWeight: FontWeight.w600,
                               ),
+                              textAlign: TextAlign.center,
                             ),
                           ),
                           Padding(
@@ -188,7 +202,7 @@ class _AddCategoryToConferenceDayState
                                 },
                                 buttonText: const Text(
                                   'Select categories',
-                                  style: TextStyle(color: Color(0xffbe2b61)),
+                                  style: TextStyle(color: Colors.white),
                                 ),
                                 selectedItemsTextStyle:
                                     const TextStyle(color: Colors.white),
@@ -221,96 +235,48 @@ class _AddCategoryToConferenceDayState
                               ),
                             ),
                           ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.all(6.0),
-                                child: SizedBox(
-                                  height: 50.0,
-                                  width:
-                                      MediaQuery.of(context).size.width * 0.42,
-                                  child: ElevatedButton(
-                                    style: ElevatedButton.styleFrom(
-                                      backgroundColor: const Color(0xffbe2b61),
-                                      padding: const EdgeInsets.symmetric(
-                                          vertical: 16.0),
-                                      shape: RoundedRectangleBorder(
-                                        side: const BorderSide(
-                                          color: Color(0xffbb2a5f),
-                                          width: 2.0,
-                                        ),
-                                        borderRadius:
-                                            BorderRadius.circular(8.0),
+                          Center(
+                            child: Padding(
+                              padding: const EdgeInsets.all(6.0),
+                              child: SizedBox(
+                                width: MediaQuery.of(context).size.width * 0.83,
+                                height: 50.0,
+                                child: ElevatedButton(
+                                  style: ElevatedButton.styleFrom(
+                                    backgroundColor: const Color(0xffbe2b61),
+                                    padding: const EdgeInsets.symmetric(
+                                        vertical: 16.0),
+                                    shape: RoundedRectangleBorder(
+                                      side: const BorderSide(
+                                        color: Color(0xffbb2a5f),
+                                        width: 2.0,
                                       ),
+                                      borderRadius: BorderRadius.circular(8.0),
                                     ),
-                                    onPressed: () async {
-                                      int res =
-                                          await _addCategoryToConferenceDay();
-                                      if (res == 1) {
-                                        Navigator.of(context).push(
-                                          MaterialPageRoute(
-                                            builder: (context) {
-                                              return ConferencesDayCreateScreen(
-                                                conferenceId:
-                                                    widget.conferenceId,
-                                              );
-                                            },
-                                          ),
-                                        );
-                                      }
-                                    },
-                                    child: const Text(
-                                      'Create more conference days!',
-                                    ),
+                                  ),
+                                  onPressed: () async {
+                                    int res =
+                                        await _editCategoryInConferenceDay();
+                                    if (res == 1) {
+                                      Navigator.of(context).push(
+                                        MaterialPageRoute(
+                                          builder: (context) {
+                                            return ConferencesDayShowDetails(
+                                              conferenceId: widget.conferenceId,
+                                              conferenceDayId:
+                                                  widget.conferenceDayId,
+                                            );
+                                          },
+                                        ),
+                                      );
+                                    }
+                                  },
+                                  child: const Text(
+                                    '  Add categories!  ',
                                   ),
                                 ),
                               ),
-                              Padding(
-                                padding: const EdgeInsets.all(6.0),
-                                child: SizedBox(
-                                  height: 50.0,
-                                  width:
-                                      MediaQuery.of(context).size.width * 0.42,
-                                  child: ElevatedButton(
-                                    style: ElevatedButton.styleFrom(
-                                      backgroundColor: const Color(0xffbe2b61),
-                                      padding: const EdgeInsets.symmetric(
-                                          vertical: 16.0),
-                                      shape: RoundedRectangleBorder(
-                                        side: const BorderSide(
-                                          color: Color(0xffbb2a5f),
-                                          width: 2.0,
-                                        ),
-                                        borderRadius:
-                                            BorderRadius.circular(8.0),
-                                      ),
-                                    ),
-                                    onPressed: () async {
-                                      int res =
-                                          await _addCategoryToConferenceDay();
-                                      if (res == 1) {
-                                        Navigator.of(context).push(
-                                          MaterialPageRoute(
-                                            builder: (context) {
-                                              return PartnersAddScreen(
-                                                conferenceId:
-                                                    widget.conferenceId,
-                                                conferenceDayId:
-                                                    widget.conferenceDayId,
-                                              );
-                                            },
-                                          ),
-                                        );
-                                      }
-                                    },
-                                    child: const Text(
-                                      'Create partners of conference!',
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ],
+                            ),
                           ),
                         ],
                       ),

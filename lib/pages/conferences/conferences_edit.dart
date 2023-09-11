@@ -5,25 +5,24 @@ import 'package:conferences_mobile/components/customAppBar.dart';
 import 'package:conferences_mobile/components/drawer.dart';
 import 'package:conferences_mobile/model/auth.dart';
 import 'package:conferences_mobile/model/city.dart';
-import 'package:conferences_mobile/model/organization.dart';
+import 'package:conferences_mobile/model/conferences.dart';
 import 'package:conferences_mobile/network/city_service.dart';
 import 'package:conferences_mobile/network/conference_service.dart';
-import 'package:conferences_mobile/network/organization_service.dart';
-import 'package:conferences_mobile/pages/conferences/conference_days_create.dart';
+import 'package:conferences_mobile/pages/conferences/confeerence_detail_for_creator.dart';
 import 'package:flutter/material.dart';
 
-class ConferencesCreateScreen extends StatefulWidget {
-  const ConferencesCreateScreen({super.key});
+class ConferenceEditScreen extends StatefulWidget {
+  final int conferenceId;
+  const ConferenceEditScreen({super.key, required this.conferenceId});
 
   @override
-  State<ConferencesCreateScreen> createState() =>
-      _ConferencesCreateScreenState();
+  State<ConferenceEditScreen> createState() => _ConferenceEditScreenState();
 }
 
-class _ConferencesCreateScreenState extends State<ConferencesCreateScreen> {
-  bool isLoggedin = false;
-  bool isLoading = true;
-  List<Organization> _organizations = [];
+class _ConferenceEditScreenState extends State<ConferenceEditScreen> {
+  late Conference _conference;
+  bool _isLoading = true;
+  bool isCreatorOfConference = false;
   List<City> _cities = [];
   UserModel? user;
   DateTime endDate = DateTime.now();
@@ -32,24 +31,62 @@ class _ConferencesCreateScreenState extends State<ConferencesCreateScreen> {
   TextEditingController descriptionContoller = TextEditingController();
   TextEditingController startDateController = TextEditingController();
   TextEditingController endDateContoller = TextEditingController();
-  int? selectedOrganization;
   int? selectedCity;
   String? _nameError, _descriptionError, _startingDateError, _endingDateError;
-  @override
+
   void initState() {
     super.initState();
-    _checkLoggedInStatus();
+    _getConferenceDetails(widget.conferenceId);
     _getCity();
+    _checkIsAutor();
   }
 
-  bool _isNumeric(String str) {
-    if (str.isEmpty) {
-      return false;
+  void _getConferenceDetails(int id) {
+    ConferenceServise.getConferenceDetail(id).then((conference) {
+      setState(() {
+        _conference = conference;
+        nameContoller.text = _conference.name;
+        descriptionContoller.text = _conference.description;
+        startDateController.text = _conference.starting_date;
+        endDateContoller.text = _conference.ending_date;
+        selectedCity = _conference.cityId;
+        _isLoading = false;
+      });
+    });
+  }
+
+  _getCity() {
+    CityService.getCity().then((city) {
+      if (mounted) {
+        setState(() {
+          _cities = city;
+        });
+      }
+    });
+  }
+
+  Future<void> _checkIsAutor() async {
+    await Future.delayed(Duration.zero);
+    user = await AuthModel().LoggedInUser();
+    int creatorId =
+        await ConferenceServise.getIdOfCreatorOfConference(widget.conferenceId);
+
+    if (user!.id == creatorId) {
+      setState(() {
+        isCreatorOfConference = true;
+      });
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('You must be creator so you can edit conference.'),
+          backgroundColor: Color(0xffbe2b61),
+        ),
+      );
+      Navigator.of(context).pushNamed('/');
     }
-    return double.tryParse(str) != null;
   }
 
-  void _createConference() async {
+  void _editConference() async {
     try {
       String name = nameContoller.text;
       String description = descriptionContoller.text;
@@ -61,22 +98,22 @@ class _ConferencesCreateScreenState extends State<ConferencesCreateScreen> {
         'starting_date': startDate,
         'ending_date': endDate,
         'city_id': selectedCity,
-        'organization_id': selectedOrganization
       };
       final jsonData = jsonEncode(response);
-      String result = await ConferenceServise.createConference(jsonData);
-      if (_isNumeric(result) && result != '-1') {
-        int confId = jsonDecode(result);
+      String result =
+          await ConferenceServise.editConference(jsonData, widget.conferenceId);
+      if (result == '200') {
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(
-            content: Text('Conference created successfully!'),
+            content: Text('Conference edited successfully!'),
             backgroundColor: Color(0xff4a23b2),
           ),
         );
         Navigator.of(context).push(
           MaterialPageRoute(
             builder: (context) {
-              return ConferencesDayCreateScreen(conferenceId: confId);
+              return ConferenceDetailForCreatorScreen(
+                  conferenceId: widget.conferenceId);
             },
           ),
         );
@@ -109,50 +146,9 @@ class _ConferencesCreateScreenState extends State<ConferencesCreateScreen> {
     }
   }
 
-  void getOrganizationsOfUser(int id) {
-    OrganizationService.getOrganizationsByUser(id).then((organization) {
-      setState(() {
-        _organizations = organization;
-        isLoading = false;
-      });
-    });
-  }
-
-  Future<void> _checkLoggedInStatus() async {
-    await Future.delayed(Duration.zero);
-    user = await AuthModel().LoggedInUser();
-    setState(
-      () {
-        if (user == null) {
-          isLoggedin = false;
-          ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(
-              content: Text('You must be logedin so You can buy subscription.'),
-              backgroundColor: Color(0xffbe2b61),
-            ),
-          );
-          Navigator.of(context).pushNamed('/login');
-        } else {
-          isLoggedin = true;
-          getOrganizationsOfUser(user!.id);
-        }
-      },
-    );
-  }
-
-  _getCity() {
-    CityService.getCity().then((city) {
-      if (mounted) {
-        setState(() {
-          _cities = city;
-        });
-      }
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
-    if (isLoggedin == false) {
+    if (isCreatorOfConference == false) {
       return Scaffold(
         appBar: CustomAppBar(
           onDrawerIconPressed: () {
@@ -202,7 +198,7 @@ class _ConferencesCreateScreenState extends State<ConferencesCreateScreen> {
           ),
           body: Stack(children: [
             const BackgroundScrollView(),
-            isLoading
+            _isLoading
                 ? const Center(
                     child: CircularProgressIndicator(),
                   )
@@ -212,7 +208,7 @@ class _ConferencesCreateScreenState extends State<ConferencesCreateScreen> {
                         Padding(
                           padding: const EdgeInsets.all(15.0),
                           child: Text(
-                            'Create your conference!'.toUpperCase(),
+                            'Edit your conference!'.toUpperCase(),
                             style: const TextStyle(
                               color: Colors.white,
                               fontSize: 20.0,
@@ -230,16 +226,15 @@ class _ConferencesCreateScreenState extends State<ConferencesCreateScreen> {
                               decoration: InputDecoration(
                                 labelText: 'Name',
                                 errorText: _nameError,
-                                labelStyle: const TextStyle(
-                                  color: Colors.white,
-                                ),
+                                labelStyle:
+                                    const TextStyle(color: Color(0xffbe2b61)),
                                 enabledBorder: const OutlineInputBorder(
                                   borderSide: BorderSide(
-                                      color: Color(0xffbe2b61), width: 1.5),
+                                      color: Color(0xff4a23b2), width: 1.5),
                                 ),
                                 focusedBorder: const OutlineInputBorder(
                                   borderSide: BorderSide(
-                                    color: Color(0xffbe2b61),
+                                    color: Color(0xffeadc48),
                                     width: 0.50,
                                   ),
                                 ),
@@ -251,7 +246,7 @@ class _ConferencesCreateScreenState extends State<ConferencesCreateScreen> {
                                 filled: true,
                               ),
                               style: const TextStyle(
-                                  color: Color(0xffbe2b61), fontSize: 18.0),
+                                  color: Colors.amber, fontSize: 18.0),
                             ),
                           ),
                         ),
@@ -266,16 +261,15 @@ class _ConferencesCreateScreenState extends State<ConferencesCreateScreen> {
                               decoration: InputDecoration(
                                 labelText: 'Description',
                                 errorText: _descriptionError,
-                                labelStyle: const TextStyle(
-                                  color: Colors.white,
-                                ),
+                                labelStyle:
+                                    const TextStyle(color: Color(0xffbe2b61)),
                                 enabledBorder: const OutlineInputBorder(
                                   borderSide: BorderSide(
-                                      color: Color(0xffbe2b61), width: 1.5),
+                                      color: Color(0xff4a23b2), width: 1.5),
                                 ),
                                 focusedBorder: const OutlineInputBorder(
                                   borderSide: BorderSide(
-                                    color: Color(0xffbe2b61),
+                                    color: Color(0xffeadc48),
                                     width: 0.50,
                                   ),
                                 ),
@@ -287,7 +281,7 @@ class _ConferencesCreateScreenState extends State<ConferencesCreateScreen> {
                                 filled: true,
                               ),
                               style: const TextStyle(
-                                  color: Color(0xffbe2b61), fontSize: 18.0),
+                                  color: Colors.amber, fontSize: 18.0),
                             ),
                           ),
                         ),
@@ -300,61 +294,7 @@ class _ConferencesCreateScreenState extends State<ConferencesCreateScreen> {
                             decoration: BoxDecoration(
                               color: const Color(0XFF1A1A1A),
                               border: Border.all(
-                                color: const Color(0xffbe2b61),
-                                width: 2.0,
-                              ),
-                              borderRadius: BorderRadius.circular(8.0),
-                            ),
-                            child: Theme(
-                              data: Theme.of(context).copyWith(
-                                canvasColor: const Color(0xff1A1A1A),
-                              ),
-                              child: DropdownButtonHideUnderline(
-                                child: DropdownButton<int?>(
-                                  value: selectedOrganization,
-                                  hint: const Padding(
-                                    padding: EdgeInsets.fromLTRB(
-                                        16.0, 8.0, 16.0, 8.0),
-                                    child: Text(
-                                      'Select your organization ',
-                                      style: TextStyle(
-                                        color: Colors.white,
-                                      ),
-                                    ),
-                                  ),
-                                  onChanged: (int? newValue) {
-                                    setState(() {
-                                      selectedOrganization = newValue!;
-                                    });
-                                  },
-                                  items: _organizations
-                                      .map<DropdownMenuItem<int?>>(
-                                          (Organization organization) {
-                                    return DropdownMenuItem<int?>(
-                                      value: organization.id,
-                                      child: Text(
-                                        organization.name,
-                                        style: const TextStyle(
-                                          color: Color(0xffbe2b61),
-                                        ),
-                                      ),
-                                    );
-                                  }).toList(),
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-
-                        Padding(
-                          padding: const EdgeInsets.all(15.0),
-                          child: Container(
-                            height: 50.0,
-                            width: MediaQuery.of(context).size.width * 0.85,
-                            decoration: BoxDecoration(
-                              color: const Color(0XFF1A1A1A),
-                              border: Border.all(
-                                color: const Color(0xffbe2b61),
+                                color: const Color(0xff4a23b2),
                                 width: 2.0,
                               ),
                               borderRadius: BorderRadius.circular(8.0),
@@ -372,7 +312,7 @@ class _ConferencesCreateScreenState extends State<ConferencesCreateScreen> {
                                     child: Text(
                                       'Select city ',
                                       style: TextStyle(
-                                        color: Colors.white,
+                                        color: Color((0xffbe2b61)),
                                       ),
                                     ),
                                   ),
@@ -409,16 +349,15 @@ class _ConferencesCreateScreenState extends State<ConferencesCreateScreen> {
                               decoration: InputDecoration(
                                 labelText: 'Starting date',
                                 errorText: _startingDateError,
-                                labelStyle: const TextStyle(
-                                  color: Colors.white,
-                                ),
+                                labelStyle:
+                                    const TextStyle(color: Color(0xffbe2b61)),
                                 enabledBorder: const OutlineInputBorder(
                                   borderSide: BorderSide(
-                                      color: Color(0xffbe2b61), width: 1.5),
+                                      color: Color(0xff4a23b2), width: 1.5),
                                 ),
                                 focusedBorder: const OutlineInputBorder(
                                   borderSide: BorderSide(
-                                    color: Color(0xffbe2b61),
+                                    color: Color(0xffeadc48),
                                     width: 0.50,
                                   ),
                                 ),
@@ -446,7 +385,7 @@ class _ConferencesCreateScreenState extends State<ConferencesCreateScreen> {
                                 ),
                               ),
                               style: const TextStyle(
-                                  color: Color(0xffbe2b61), fontSize: 18.0),
+                                  color: Colors.amber, fontSize: 18.0),
                             ),
                           ),
                         ),
@@ -461,16 +400,15 @@ class _ConferencesCreateScreenState extends State<ConferencesCreateScreen> {
                               decoration: InputDecoration(
                                 labelText: 'Ending date',
                                 errorText: _endingDateError,
-                                labelStyle: const TextStyle(
-                                  color: Colors.white,
-                                ),
+                                labelStyle:
+                                    const TextStyle(color: Color(0xffbe2b61)),
                                 enabledBorder: const OutlineInputBorder(
                                   borderSide: BorderSide(
-                                      color: Color(0xffbe2b61), width: 1.5),
+                                      color: Color(0xff4a23b2), width: 1.5),
                                 ),
                                 focusedBorder: const OutlineInputBorder(
                                   borderSide: BorderSide(
-                                    color: Color(0xffbe2b61),
+                                    color: Color(0xffeadc48),
                                     width: 0.50,
                                   ),
                                 ),
@@ -498,7 +436,7 @@ class _ConferencesCreateScreenState extends State<ConferencesCreateScreen> {
                                 ),
                               ),
                               style: const TextStyle(
-                                  color: Color(0xffbe2b61), fontSize: 18.0),
+                                  color: Colors.amber, fontSize: 18.0),
                             ),
                           ),
                         ),
@@ -522,10 +460,10 @@ class _ConferencesCreateScreenState extends State<ConferencesCreateScreen> {
                                 ),
                               ),
                               onPressed: () {
-                                _createConference();
+                                _editConference();
                               },
                               child: const Text(
-                                'Create conference!',
+                                'Edit conference!',
                               ),
                             ),
                           ),

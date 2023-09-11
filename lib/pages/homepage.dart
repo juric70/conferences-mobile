@@ -241,18 +241,34 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                       children: [
                         Center(
                           child: Container(
+                            width: cardWidth,
                             margin:
-                                const EdgeInsets.fromLTRB(0.0, 65.0, 0.0, 0.0),
-                            child: const Text(
-                              'UPCOMING CONFERENCES!',
-                              style: TextStyle(
-                                color: Colors.white,
-                                decoration: TextDecoration.underline,
-                                decorationThickness: 1.0,
-                                fontSize: 20.0,
-                                fontWeight: FontWeight.w500,
-                                letterSpacing: 1.3,
-                                wordSpacing: 3,
+                                const EdgeInsets.fromLTRB(0.0, 80.0, 0.0, 0.0),
+                            decoration: BoxDecoration(
+                              color: const Color(0xff1a1a1a).withOpacity(0.97),
+                              borderRadius: BorderRadius.circular(12.0),
+                              border: Border.all(
+                                color: randomNumber == 1
+                                    ? const Color(0xffc32d63)
+                                    : randomNumber == 2
+                                        ? const Color(0xffeadc48)
+                                        : const Color(0xff663fd9),
+                              ),
+                            ),
+                            child: const Center(
+                              child: Padding(
+                                padding: EdgeInsets.all(8.0),
+                                child: Text(
+                                  'UPCOMING CONFERENCES!',
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    decorationThickness: 1.0,
+                                    fontSize: 20.0,
+                                    fontWeight: FontWeight.w500,
+                                    letterSpacing: 1.3,
+                                    wordSpacing: 3,
+                                  ),
+                                ),
                               ),
                             ),
                           ),
@@ -275,7 +291,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                                       ? const Color(0xffc32d63)
                                       : randomNumber == 2
                                           ? const Color(0xffeadc48)
-                                          : const Color(0xff4924b6),
+                                          : const Color(0xff663fd9),
                                 ),
                               ),
                               child: Row(

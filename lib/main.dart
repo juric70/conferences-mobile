@@ -1,6 +1,7 @@
 import 'package:conferences_mobile/model/auth.dart';
 import 'package:conferences_mobile/pages/conferences/conferences_create.dart';
 import 'package:conferences_mobile/pages/conferences/show_booked_tickets_of_user.dart';
+import 'package:conferences_mobile/pages/conferences/users_conferences.dart';
 import 'package:conferences_mobile/pages/index_city.dart';
 import 'package:conferences_mobile/pages/authentification/login.dart';
 import 'package:conferences_mobile/pages/authentification/logout.dart';
@@ -41,6 +42,8 @@ class MyWidget extends StatelessWidget {
         '/organizationsOffers': (context) => const OrganizationsOfferScreen(),
         '/bookedTickets': (context) => const BookedTicketsScreen(),
         '/myorganizations': (context) => const ShowUsersOrganizationsScreen(),
+        '/conferencesForCreator': (context) =>
+            const ConferencesForCreatorScreen(),
       },
     );
   }

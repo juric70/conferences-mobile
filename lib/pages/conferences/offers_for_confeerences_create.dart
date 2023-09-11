@@ -179,15 +179,16 @@ class _UsersOffersCreateScreenState extends State<UsersOffersCreateScreen> {
                           decoration: InputDecoration(
                             labelText: 'Kind',
                             errorText: _kindError,
-                            labelStyle:
-                                const TextStyle(color: Color(0xffbe2b61)),
+                            labelStyle: const TextStyle(
+                              color: Colors.white,
+                            ),
                             enabledBorder: const OutlineInputBorder(
                               borderSide: BorderSide(
-                                  color: Color(0xff4a23b2), width: 1.5),
+                                  color: Color(0xffbe2b61), width: 1.5),
                             ),
                             focusedBorder: const OutlineInputBorder(
                               borderSide: BorderSide(
-                                color: Color(0xffeadc48),
+                                color: Color(0xffbe2b61),
                                 width: 0.50,
                               ),
                             ),
@@ -199,7 +200,7 @@ class _UsersOffersCreateScreenState extends State<UsersOffersCreateScreen> {
                             filled: true,
                           ),
                           style: const TextStyle(
-                              color: Colors.amber, fontSize: 18.0),
+                              color: Color(0xffbe2b61), fontSize: 18.0),
                         ),
                       ),
                     ),
@@ -212,15 +213,16 @@ class _UsersOffersCreateScreenState extends State<UsersOffersCreateScreen> {
                           decoration: InputDecoration(
                             labelText: 'Code',
                             errorText: _codeError,
-                            labelStyle:
-                                const TextStyle(color: Color(0xffbe2b61)),
+                            labelStyle: const TextStyle(
+                              color: Colors.white,
+                            ),
                             enabledBorder: const OutlineInputBorder(
                               borderSide: BorderSide(
-                                  color: Color(0xff4a23b2), width: 1.5),
+                                  color: Color(0xffbe2b61), width: 1.5),
                             ),
                             focusedBorder: const OutlineInputBorder(
                               borderSide: BorderSide(
-                                color: Color(0xffeadc48),
+                                color: Color(0xffbe2b61),
                                 width: 0.50,
                               ),
                             ),
@@ -232,7 +234,7 @@ class _UsersOffersCreateScreenState extends State<UsersOffersCreateScreen> {
                             filled: true,
                           ),
                           style: const TextStyle(
-                              color: Colors.amber, fontSize: 18.0),
+                              color: Color(0xffbe2b61), fontSize: 18.0),
                         ),
                       ),
                     ),
@@ -245,15 +247,14 @@ class _UsersOffersCreateScreenState extends State<UsersOffersCreateScreen> {
                           decoration: InputDecoration(
                             labelText: 'Price',
                             errorText: _priceError,
-                            labelStyle:
-                                const TextStyle(color: Color(0xffbe2b61)),
+                            labelStyle: const TextStyle(color: Colors.white),
                             enabledBorder: const OutlineInputBorder(
                               borderSide: BorderSide(
-                                  color: Color(0xff4a23b2), width: 1.5),
+                                  color: Color(0xffbe2b61), width: 1.5),
                             ),
                             focusedBorder: const OutlineInputBorder(
                               borderSide: BorderSide(
-                                color: Color(0xffeadc48),
+                                color: Color(0xffbe2b61),
                                 width: 0.50,
                               ),
                             ),
@@ -265,7 +266,7 @@ class _UsersOffersCreateScreenState extends State<UsersOffersCreateScreen> {
                             filled: true,
                           ),
                           style: const TextStyle(
-                              color: Colors.amber, fontSize: 18.0),
+                              color: Color(0xffbe2b61), fontSize: 18.0),
                         ),
                       ),
                     ),
@@ -278,15 +279,16 @@ class _UsersOffersCreateScreenState extends State<UsersOffersCreateScreen> {
                           decoration: InputDecoration(
                             labelText: 'Description',
                             errorText: _descriptionError,
-                            labelStyle:
-                                const TextStyle(color: Color(0xffbe2b61)),
+                            labelStyle: const TextStyle(
+                              color: Colors.white,
+                            ),
                             enabledBorder: const OutlineInputBorder(
                               borderSide: BorderSide(
-                                  color: Color(0xff4a23b2), width: 1.5),
+                                  color: Color(0xffbe2b61), width: 1.5),
                             ),
                             focusedBorder: const OutlineInputBorder(
                               borderSide: BorderSide(
-                                color: Color(0xffeadc48),
+                                color: Color(0xffbe2b61),
                                 width: 0.50,
                               ),
                             ),
@@ -298,7 +300,7 @@ class _UsersOffersCreateScreenState extends State<UsersOffersCreateScreen> {
                             filled: true,
                           ),
                           style: const TextStyle(
-                              color: Colors.amber, fontSize: 18.0),
+                              color: Color(0xffbe2b61), fontSize: 18.0),
                         ),
                       ),
                     ),
@@ -311,15 +313,16 @@ class _UsersOffersCreateScreenState extends State<UsersOffersCreateScreen> {
                           decoration: InputDecoration(
                             labelText: 'Number of days user have to book',
                             errorText: _numberOfDaysError,
-                            labelStyle:
-                                const TextStyle(color: Color(0xffbe2b61)),
+                            labelStyle: const TextStyle(
+                              color: Colors.white,
+                            ),
                             enabledBorder: const OutlineInputBorder(
                               borderSide: BorderSide(
-                                  color: Color(0xff4a23b2), width: 1.5),
+                                  color: Color(0xffbe2b61), width: 1.5),
                             ),
                             focusedBorder: const OutlineInputBorder(
                               borderSide: BorderSide(
-                                color: Color(0xffeadc48),
+                                color: Color(0xffbe2b61),
                                 width: 0.50,
                               ),
                             ),
@@ -331,7 +334,7 @@ class _UsersOffersCreateScreenState extends State<UsersOffersCreateScreen> {
                             filled: true,
                           ),
                           style: const TextStyle(
-                              color: Colors.amber, fontSize: 18.0),
+                              color: Color(0xffbe2b61), fontSize: 18.0),
                         ),
                       ),
                     ),

@@ -134,11 +134,11 @@ class _LoginScreenState extends State<LoginScreen> {
                         labelStyle: TextStyle(color: Color(0xffbe2b61)),
                         enabledBorder: OutlineInputBorder(
                           borderSide:
-                              BorderSide(color: Color(0xff4a23b2), width: 1.5),
+                              BorderSide(color: Color(0xffbe2b61), width: 1.5),
                         ),
                         focusedBorder: OutlineInputBorder(
                           borderSide: BorderSide(
-                            color: Color(0xffeadc48),
+                            color: Color(0xffbe2b61),
                             width: 0.50,
                           ),
                         ),
@@ -149,8 +149,8 @@ class _LoginScreenState extends State<LoginScreen> {
                         fillColor: Color(0xff1a1a1a),
                         filled: true,
                       ),
-                      style:
-                          const TextStyle(color: Colors.amber, fontSize: 18.0),
+                      style: const TextStyle(
+                          color: Color(0xffbe2b61), fontSize: 18.0),
                     ),
                   ),
                 ),
@@ -166,11 +166,11 @@ class _LoginScreenState extends State<LoginScreen> {
                         labelStyle: TextStyle(color: Color(0xffbe2b61)),
                         enabledBorder: OutlineInputBorder(
                           borderSide:
-                              BorderSide(color: Color(0xff4a23b2), width: 1.5),
+                              BorderSide(color: Color(0xffbe2b61), width: 1.5),
                         ),
                         focusedBorder: OutlineInputBorder(
                           borderSide: BorderSide(
-                            color: Color(0xffeadc48),
+                            color: Color(0xffbe2b61),
                             width: 0.50,
                           ),
                         ),
@@ -181,8 +181,8 @@ class _LoginScreenState extends State<LoginScreen> {
                         fillColor: Color(0xff1a1a1a),
                         filled: true,
                       ),
-                      style:
-                          const TextStyle(color: Colors.amber, fontSize: 20.0),
+                      style: const TextStyle(
+                          color: Color(0xffbe2b61), fontSize: 20.0),
                     ),
                   ),
                 ),

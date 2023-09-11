@@ -104,7 +104,11 @@ class _ConferencesAllScreenState extends State<ConferencesAllScreen> {
                               height: 40.0,
                               decoration: BoxDecoration(
                                 border: Border.all(
-                                  color: const Color(0xff4a23b2),
+                                  color: randomNumber == 1
+                                      ? const Color(0xffc32d63)
+                                      : randomNumber == 2
+                                          ? const Color(0xffeadc48)
+                                          : const Color(0xff663fd9),
                                 ),
                                 borderRadius: BorderRadius.circular(5.0),
                                 color: const Color(0xff1a1a1a),
@@ -115,14 +119,23 @@ class _ConferencesAllScreenState extends State<ConferencesAllScreen> {
                                     searchText = value;
                                   });
                                 },
-                                decoration: const InputDecoration(
+                                decoration: InputDecoration(
                                   hintText: 'Search',
-                                  hintStyle:
-                                      TextStyle(color: Color(0xffbe2b61)),
+                                  hintStyle: TextStyle(
+                                    color: randomNumber == 1
+                                        ? const Color(0xffc32d63)
+                                        : randomNumber == 2
+                                            ? const Color(0xffeadc48)
+                                            : const Color(0xff997fe6),
+                                  ),
                                   border: InputBorder.none,
                                   prefixIcon: Icon(
                                     Icons.search,
-                                    color: Color(0xff4a23b2),
+                                    color: randomNumber == 1
+                                        ? const Color(0xffc32d63)
+                                        : randomNumber == 2
+                                            ? const Color(0xffeadc48)
+                                            : const Color(0xff997fe6),
                                   ),
                                 ),
                                 style:
@@ -147,7 +160,7 @@ class _ConferencesAllScreenState extends State<ConferencesAllScreen> {
                                 ? const Color(0xffc32d63)
                                 : randomNumber == 2
                                     ? const Color(0xffeadc48)
-                                    : const Color(0xff4924b6),
+                                    : const Color(0xff663fd9),
                           ),
                         ),
                         child: Row(

@@ -6,7 +6,8 @@ class Timetable {
       address,
       conferenceRoom,
       description,
-      host;
+      host,
+      hostMail;
 
   Timetable({
     this.id = 0,
@@ -18,19 +19,21 @@ class Timetable {
     this.conferenceRoom = '',
     this.description = '',
     this.host = '',
+    this.hostMail = '',
   });
 
   factory Timetable.fromJson(Map<String, dynamic> json) {
     return Timetable(
       id: json['id'] ?? 0,
       availableSeats: json['available_seats'] ?? 0,
-      startingTime: json['starting_time'] ?? '',
-      endingTime: json['ending_time'] ?? '',
+      startingTime: json['start_time'] ?? '',
+      endingTime: json['end_time'] ?? '',
       title: json['title'] ?? '',
       address: json['address'] ?? '',
       conferenceRoom: json['conference_room'] ?? '',
       description: json['description'] ?? '',
       host: json['user']['name'] ?? '',
+      hostMail: json['user']['email'] ?? '',
     );
   }
 }

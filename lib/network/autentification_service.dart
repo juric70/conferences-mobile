@@ -8,7 +8,7 @@ import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
 class AuthentificationService extends AuthModel {
-  static Future<String> registerUser(String data, BuildContext context) async {
+  static Future<String> registerUser(String data) async {
     final response = await http.post(
       Uri.parse('${ApiConstances.baseUrl}register'),
       body: data,
@@ -84,7 +84,7 @@ class AuthentificationService extends AuthModel {
 
       for (var roleData in rolesData) {
         if (roleData['name'] == 'user') {
-          return int.parse(roleData['id']);
+          return roleData['id'];
         }
       }
       throw Exception('User not found');

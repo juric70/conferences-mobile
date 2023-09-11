@@ -149,7 +149,7 @@ class _OrganizationDetailScreenState extends State<OrganizationDetailScreen> {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             const Text(
-                              'Adresa:',
+                              'Address:',
                               style: TextStyle(
                                 color: Colors.white,
                                 fontSize: 16.0,

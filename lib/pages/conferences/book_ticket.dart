@@ -177,7 +177,7 @@ class _BookTicketScreenState extends State<BookTicketScreen> {
                           padding: const EdgeInsets.all(15.0),
                           child: Center(
                             child: Text(
-                              'Book ticket now!!!'.toUpperCase(),
+                              'Book tickets now'.toUpperCase(),
                               style: const TextStyle(
                                 color: Colors.white,
                                 fontSize: 20.0,
@@ -186,56 +186,63 @@ class _BookTicketScreenState extends State<BookTicketScreen> {
                             ),
                           ),
                         ),
-                        Column(
-                          children: [
-                            for (ConferenceDay confDays
-                                in _conference.conferences_day!)
-                              Padding(
-                                padding: const EdgeInsets.all(4.0),
-                                child: Center(
-                                  child: Text(
-                                    '${confDays.date} - Day ${confDays.day_number}: ${confDays.price}€'
-                                        .toUpperCase(),
-                                    style: const TextStyle(
-                                      color: Color(0xffbe2b61),
-                                      fontSize: 15.0,
-                                      fontWeight: FontWeight.w700,
+                        Container(
+                          width: MediaQuery.of(context).size.width * 0.83,
+                          decoration: BoxDecoration(
+                              border: Border.all(
+                                color: Color(0xffeadc48),
+                              ),
+                              borderRadius: BorderRadius.circular(15.0)),
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Column(
+                              children: [
+                                for (ConferenceDay confDays
+                                    in _conference.conferences_day!)
+                                  Padding(
+                                    padding: const EdgeInsets.all(4.0),
+                                    child: Center(
+                                      child: Text(
+                                        '${confDays.date} - Day ${confDays.day_number}: ${confDays.price}€'
+                                            .toUpperCase(),
+                                        style: const TextStyle(
+                                          color: Color(0xffeadc48),
+                                          fontSize: 15.0,
+                                          fontWeight: FontWeight.w700,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Center(
+                                    child: Text(
+                                      'Available Discounts'.toUpperCase(),
+                                      style: const TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 15.0,
+                                        fontWeight: FontWeight.w700,
+                                      ),
                                     ),
                                   ),
                                 ),
-                              ),
-                          ],
-                        ),
-                        Column(
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Center(
-                                child: Text(
-                                  'Available Discounts'.toUpperCase(),
-                                  style: const TextStyle(
-                                    color: Color(0xffbe2b61),
-                                    fontSize: 17.0,
-                                    fontWeight: FontWeight.w700,
+                                for (UsersOffer usersOffer in _usersOffer)
+                                  Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Center(
+                                      child: Text(
+                                        'CODE: ${usersOffer.code}     ${usersOffer.kind}    PRICE: ${usersOffer.price}€ ',
+                                        style: const TextStyle(
+                                          color: Color(0xffeadc48),
+                                          fontSize: 12.0,
+                                          fontWeight: FontWeight.w700,
+                                        ),
+                                      ),
+                                    ),
                                   ),
-                                ),
-                              ),
+                              ],
                             ),
-                            for (UsersOffer usersOffer in _usersOffer)
-                              Padding(
-                                padding: const EdgeInsets.all(4.0),
-                                child: Center(
-                                  child: Text(
-                                    'CODE: ${usersOffer.code}        ${usersOffer.kind}        PRICE: ${usersOffer.price}€ ',
-                                    style: const TextStyle(
-                                      color: Color(0xffbe2b61),
-                                      fontSize: 15.0,
-                                      fontWeight: FontWeight.w700,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                          ],
+                          ),
                         ),
                         Padding(
                           padding: const EdgeInsets.all(8.0),
@@ -252,34 +259,27 @@ class _BookTicketScreenState extends State<BookTicketScreen> {
                               },
                               buttonText: const Text(
                                 'Select',
-                                style: TextStyle(color: Color(0xffbe2b61)),
+                                style: TextStyle(color: Color(0xffeadc48)),
                               ),
                               selectedItemsTextStyle:
                                   const TextStyle(color: Colors.white),
                               backgroundColor: const Color(0xff1a1a1a),
-                              title: Text(
+                              title: const Text(
                                 'Select days of conference You want to book!',
                                 style: TextStyle(
-                                    color: const Color(0xff4a23b2),
-                                    shadows: [
-                                      Shadow(
-                                        offset: const Offset(0.50, 0.50),
-                                        blurRadius: 0.80,
-                                        color: Colors.white.withOpacity(0.3),
-                                      )
-                                    ],
+                                    color: Color(0xffeadc48),
                                     fontWeight: FontWeight.w900),
                               ),
                               selectedColor: const Color(0xff4a23b2),
                               decoration: BoxDecoration(
                                 border: Border.all(
-                                    color: const Color(0xff4a23b2), width: 2.0),
-                                borderRadius: BorderRadius.circular(1.0),
+                                    color: const Color(0xffeadc48), width: 1.0),
+                                borderRadius: BorderRadius.circular(10.0),
                                 color: const Color(0xff1a1a1a),
                               ),
                               buttonIcon: const Icon(
                                 Icons.arrow_downward,
-                                color: Color(0xff4a23b2),
+                                color: Color(0xffeadc48),
                               ),
                             ),
                           ),
@@ -290,17 +290,22 @@ class _BookTicketScreenState extends State<BookTicketScreen> {
                             widthFactor: 0.9,
                             child: TextFormField(
                               controller: codeController,
-                              decoration: const InputDecoration(
+                              decoration: InputDecoration(
                                 labelText: 'Code for discount ',
-                                labelStyle: TextStyle(
-                                    color: Color(0xffbe2b61), fontSize: 14.0),
-                                enabledBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(
-                                      color: Color(0xff4a23b2), width: 2.0),
+                                labelStyle: const TextStyle(
+                                  color: Color(0xffeadc48),
+                                  fontSize: 14.0,
                                 ),
-                                focusedBorder: OutlineInputBorder(
+                                enabledBorder: OutlineInputBorder(
+                                  borderSide: const BorderSide(
+                                    color: Color(0xffeadc48),
+                                    width: 1.0,
+                                  ),
+                                  borderRadius: BorderRadius.circular(10.0),
+                                ),
+                                focusedBorder: const OutlineInputBorder(
                                   borderSide: BorderSide(
-                                    color: Color(0xff4a23b2),
+                                    color: Color(0xffeadc48),
                                     width: 0.50,
                                   ),
                                 ),
@@ -312,7 +317,7 @@ class _BookTicketScreenState extends State<BookTicketScreen> {
                                 filled: true,
                               ),
                               style: const TextStyle(
-                                  color: Color(0xffbe2b61), fontSize: 17.0),
+                                  color: Color(0xffeadc48), fontSize: 17.0),
                             ),
                           ),
                         ),
@@ -322,12 +327,12 @@ class _BookTicketScreenState extends State<BookTicketScreen> {
                             width: MediaQuery.of(context).size.width * 0.85,
                             child: ElevatedButton(
                               style: ElevatedButton.styleFrom(
-                                backgroundColor: const Color(0xff4a23b2),
+                                backgroundColor: const Color(0xffeadc48),
                                 padding:
                                     const EdgeInsets.symmetric(vertical: 16.0),
                                 shape: RoundedRectangleBorder(
                                   side: const BorderSide(
-                                    color: Color(0xff351980),
+                                    color: Color(0xffcdbe18),
                                     width: 2.0,
                                   ),
                                   borderRadius: BorderRadius.circular(8.0),
@@ -338,6 +343,9 @@ class _BookTicketScreenState extends State<BookTicketScreen> {
                               },
                               child: const Text(
                                 'Book ticket!',
+                                style: TextStyle(
+                                  color: Color(0xff2a2a2a),
+                                ),
                               ),
                             ),
                           ),

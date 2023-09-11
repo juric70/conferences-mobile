@@ -2,25 +2,25 @@ import 'package:conferences_mobile/components/backgroundScrollView.dart';
 import 'package:conferences_mobile/components/customAppBar.dart';
 import 'package:conferences_mobile/components/drawer.dart';
 import 'package:conferences_mobile/model/auth.dart';
-import 'package:conferences_mobile/model/organization.dart';
-import 'package:conferences_mobile/network/organization_service.dart';
-import 'package:conferences_mobile/pages/organizations/organization_details.dart';
+import 'package:conferences_mobile/model/conferences.dart';
+import 'package:conferences_mobile/network/conference_service.dart';
+import 'package:conferences_mobile/pages/conferences/confeerence_detail_for_creator.dart';
 import 'package:flutter/material.dart';
 
-class ShowUsersOrganizationsScreen extends StatefulWidget {
-  const ShowUsersOrganizationsScreen({super.key});
+class ConferencesForCreatorScreen extends StatefulWidget {
+  const ConferencesForCreatorScreen({super.key});
 
   @override
-  State<ShowUsersOrganizationsScreen> createState() =>
-      _ShowUsersOrganizationsScreenState();
+  State<ConferencesForCreatorScreen> createState() =>
+      _ConferencesForCreatorScreenState();
 }
 
-class _ShowUsersOrganizationsScreenState
-    extends State<ShowUsersOrganizationsScreen> {
+class _ConferencesForCreatorScreenState
+    extends State<ConferencesForCreatorScreen> {
   bool isLoggedIn = false;
   bool isLoading = true;
   UserModel? user;
-  List<Organization> _organizations = [];
+  List<Conference> _conferences = [];
 
   @override
   void initState() {
@@ -45,16 +45,16 @@ class _ShowUsersOrganizationsScreenState
           Navigator.of(context).pushNamed('/login');
         } else {
           isLoggedIn = true;
-          getOrganizationsOfUser(user!.id);
+          getConferencesOfUser(user!.id);
         }
       },
     );
   }
 
-  void getOrganizationsOfUser(int id) {
-    OrganizationService.getOrganizationsByUser(id).then((organization) {
+  void getConferencesOfUser(int id) {
+    ConferenceServise.getConferencesByUser(id).then((conferences) {
       setState(() {
-        _organizations = organization;
+        _conferences = conferences;
         isLoading = false;
       });
     });
@@ -123,7 +123,7 @@ class _ShowUsersOrganizationsScreenState
                           Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: Text(
-                              'My organizations!'.toUpperCase(),
+                              'My conferences!'.toUpperCase(),
                               style: const TextStyle(
                                 color: Colors.white,
                                 fontSize: 20.0,
@@ -131,24 +131,43 @@ class _ShowUsersOrganizationsScreenState
                               ),
                             ),
                           ),
-                          const Padding(
+                          Padding(
                             padding: EdgeInsets.all(15.0),
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                Text(
-                                  'Organizations',
-                                  style: TextStyle(
-                                      color: Color(0xffeadc48),
-                                      fontSize: 17.0,
-                                      fontWeight: FontWeight.bold),
+                                Container(
+                                  width:
+                                      MediaQuery.of(context).size.width * 0.35,
+                                  child: const Text(
+                                    'Conferences',
+                                    style: TextStyle(
+                                        color: Color(0xffeadc48),
+                                        fontSize: 17.0,
+                                        fontWeight: FontWeight.bold),
+                                  ),
                                 ),
-                                Text(
-                                  'See more',
-                                  style: TextStyle(
-                                      color: Color(0xffeadc48),
-                                      fontSize: 17.0,
-                                      fontWeight: FontWeight.bold),
+                                SizedBox(
+                                  width:
+                                      MediaQuery.of(context).size.width * 0.35,
+                                  child: Text(
+                                    'Organization',
+                                    style: TextStyle(
+                                        color: Color(0xffeadc48),
+                                        fontSize: 17.0,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                ),
+                                Container(
+                                  width:
+                                      MediaQuery.of(context).size.width * 0.20,
+                                  child: Text(
+                                    'See more',
+                                    style: TextStyle(
+                                        color: Color(0xffeadc48),
+                                        fontSize: 17.0,
+                                        fontWeight: FontWeight.bold),
+                                  ),
                                 ),
                               ],
                             ),
@@ -158,7 +177,7 @@ class _ShowUsersOrganizationsScreenState
                             height: 1.0,
                             thickness: 2.0,
                           ),
-                          for (Organization organization in _organizations)
+                          for (Conference conference in _conferences)
                             Padding(
                               padding: const EdgeInsets.all(15.0),
                               child: Container(
@@ -166,23 +185,39 @@ class _ShowUsersOrganizationsScreenState
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
                                   children: [
-                                    Text(
-                                      organization.name,
-                                      style: TextStyle(
-                                          color: Colors.white, fontSize: 17.0),
+                                    Container(
+                                      width: MediaQuery.of(context).size.width *
+                                          0.35,
+                                      child: Text(
+                                        conference.name,
+                                        style: const TextStyle(
+                                            color: Colors.white,
+                                            fontSize: 17.0),
+                                      ),
+                                    ),
+                                    Container(
+                                      width: MediaQuery.of(context).size.width *
+                                          0.35,
+                                      child: Text(
+                                        conference.organization,
+                                        style: const TextStyle(
+                                            color: Colors.white,
+                                            fontSize: 17.0),
+                                      ),
                                     ),
                                     Container(
                                       height: 30.0,
-                                      width: 50.0,
+                                      width: MediaQuery.of(context).size.width *
+                                          0.20,
                                       color: const Color(0xff2a2a2a),
                                       child: ElevatedButton(
                                         onPressed: () {
                                           Navigator.of(context).push(
                                             MaterialPageRoute(
                                               builder: (context) =>
-                                                  OrganizationDetailScreen(
-                                                      organizationId:
-                                                          organization.id),
+                                                  ConferenceDetailForCreatorScreen(
+                                                      conferenceId:
+                                                          conference.id),
                                             ),
                                           );
                                         },
@@ -209,19 +244,15 @@ class _ShowUsersOrganizationsScreenState
                     ),
                   ),
             Positioned(
-              bottom: 10.0,
-              right: 10.0,
-              child: FloatingActionButton(
-                onPressed: () {
-                  Navigator.of(context).pushNamed('/organizationsCreate');
-                },
-                backgroundColor: const Color(0xff4924b6),
-                child: const Icon(
-                  Icons.add,
-                  color: Colors.white,
-                ),
-              ),
-            )
+                bottom: 10.0,
+                right: 10.0,
+                child: FloatingActionButton(
+                  onPressed: () {
+                    Navigator.of(context).pushNamed('/conferencesCreate');
+                  },
+                  backgroundColor: Color(0xff4924b6),
+                  child: Icon(Icons.add, color: Colors.white),
+                ))
           ]),
         ),
       );

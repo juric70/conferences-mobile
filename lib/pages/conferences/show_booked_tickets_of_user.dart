@@ -164,7 +164,7 @@ class _BookedTicketsScreenState extends State<BookedTicketsScreen> {
                                     height: 40.0,
                                     decoration: BoxDecoration(
                                       border: Border.all(
-                                        color: const Color(0xff4a23b2),
+                                        color: const Color(0XFFeadc48),
                                       ),
                                       borderRadius: BorderRadius.circular(5.0),
                                       color: const Color(0xff1a1a1a),
@@ -178,15 +178,15 @@ class _BookedTicketsScreenState extends State<BookedTicketsScreen> {
                                       decoration: const InputDecoration(
                                         hintText: 'Search',
                                         hintStyle:
-                                            TextStyle(color: Color(0xffbe2b61)),
+                                            TextStyle(color: Color(0XFFeadc48)),
                                         border: InputBorder.none,
                                         prefixIcon: Icon(
                                           Icons.search,
-                                          color: Color(0xff4a23b2),
+                                          color: Color(0XFFeadc48),
                                         ),
                                       ),
                                       style: const TextStyle(
-                                          color: Color(0xffbe2b61)),
+                                          color: Color(0XFFeadc48)),
                                     ),
                                   ),
                                 ),
@@ -229,7 +229,7 @@ class _BookedTicketsScreenState extends State<BookedTicketsScreen> {
                                                   padding:
                                                       const EdgeInsets.all(8.0),
                                                   child: Text(
-                                                    'Price:  ${ticket.price}, it is paid',
+                                                    'Price:  ${ticket.price}€, it is paid',
                                                     style: const TextStyle(
                                                       color: Colors.white,
                                                       fontSize: 15.0,
@@ -240,7 +240,7 @@ class _BookedTicketsScreenState extends State<BookedTicketsScreen> {
                                                   padding:
                                                       const EdgeInsets.all(8.0),
                                                   child: Text(
-                                                    'Price:  ${ticket.price}, it is not paid',
+                                                    'Price:  ${ticket.price}€, it is not paid',
                                                     style: const TextStyle(
                                                       color: Colors.white,
                                                       fontSize: 16.0,
